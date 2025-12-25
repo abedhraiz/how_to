@@ -1132,6 +1132,849 @@ async function transfer(senderId, receiverId, amount) {
 pool.end();
 ```
 
+## Real-World Examples
+
+### Example 1: E-Commerce Database Schema
+
+```sql
+-- Complete e-commerce schema with relationships
+
+-- Users table
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    phone VARCHAR(20),
+    email_verified BOOLEAN DEFAULT FALSE,
+    status VARCHAR(20) DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP,
+    CONSTRAINT check_status CHECK (status IN ('active', 'inactive', 'suspended'))
+);
+
+-- User addresses
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    address_type VARCHAR(20) NOT NULL,
+    street_address VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    state VARCHAR(100),
+    postal_code VARCHAR(20),
+    country VARCHAR(100) NOT NULL,
+    is_default BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT check_address_type CHECK (address_type IN ('shipping', 'billing'))
+);
+
+-- Categories
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    parent_id INTEGER REFERENCES categories(id),
+    description TEXT,
+    image_url VARCHAR(255),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Products
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    compare_price DECIMAL(10, 2),
+    cost_price DECIMAL(10, 2),
+    sku VARCHAR(100) UNIQUE NOT NULL,
+    barcode VARCHAR(100),
+    quantity INTEGER DEFAULT 0,
+    category_id INTEGER REFERENCES categories(id),
+    brand VARCHAR(100),
+    weight DECIMAL(10, 2),
+    dimensions JSONB,
+    images JSONB,
+    is_active BOOLEAN DEFAULT TRUE,
+    is_featured BOOLEAN DEFAULT FALSE,
+    seo_title VARCHAR(255),
+    seo_description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT check_price CHECK (price >= 0),
+    CONSTRAINT check_quantity CHECK (quantity >= 0)
+);
+
+-- Product variants
+CREATE TABLE product_variants (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+    sku VARCHAR(100) UNIQUE NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    quantity INTEGER DEFAULT 0,
+    attributes JSONB NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Orders
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    order_number VARCHAR(50) UNIQUE NOT NULL,
+    user_id INTEGER REFERENCES users(id),
+    status VARCHAR(20) NOT NULL DEFAULT 'pending',
+    subtotal DECIMAL(10, 2) NOT NULL,
+    tax_amount DECIMAL(10, 2) DEFAULT 0,
+    shipping_amount DECIMAL(10, 2) DEFAULT 0,
+    discount_amount DECIMAL(10, 2) DEFAULT 0,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    currency VARCHAR(3) DEFAULT 'USD',
+    payment_method VARCHAR(50),
+    payment_status VARCHAR(20) DEFAULT 'pending',
+    shipping_address_id INTEGER REFERENCES addresses(id),
+    billing_address_id INTEGER REFERENCES addresses(id),
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    shipped_at TIMESTAMP,
+    delivered_at TIMESTAMP,
+    cancelled_at TIMESTAMP,
+    CONSTRAINT check_status CHECK (status IN ('pending', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded')),
+    CONSTRAINT check_payment_status CHECK (payment_status IN ('pending', 'paid', 'failed', 'refunded'))
+);
+
+-- Order items
+CREATE TABLE order_items (
+    id SERIAL PRIMARY KEY,
+    order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+    product_id INTEGER REFERENCES products(id),
+    variant_id INTEGER REFERENCES product_variants(id),
+    product_name VARCHAR(255) NOT NULL,
+    sku VARCHAR(100) NOT NULL,
+    quantity INTEGER NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    CONSTRAINT check_quantity CHECK (quantity > 0)
+);
+
+-- Reviews
+CREATE TABLE product_reviews (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    rating INTEGER NOT NULL,
+    title VARCHAR(255),
+    comment TEXT,
+    verified_purchase BOOLEAN DEFAULT FALSE,
+    is_approved BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT check_rating CHECK (rating BETWEEN 1 AND 5),
+    UNIQUE(product_id, user_id)
+);
+
+-- Cart
+CREATE TABLE cart_items (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+    variant_id INTEGER REFERENCES product_variants(id) ON DELETE CASCADE,
+    quantity INTEGER NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT check_quantity CHECK (quantity > 0),
+    UNIQUE(user_id, product_id, variant_id)
+);
+
+-- Create indexes for performance
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_status ON users(status);
+CREATE INDEX idx_products_category ON products(category_id);
+CREATE INDEX idx_products_slug ON products(slug);
+CREATE INDEX idx_products_active ON products(is_active) WHERE is_active = TRUE;
+CREATE INDEX idx_orders_user ON orders(user_id);
+CREATE INDEX idx_orders_status ON orders(status);
+CREATE INDEX idx_orders_created ON orders(created_at DESC);
+CREATE INDEX idx_order_items_order ON order_items(order_id);
+CREATE INDEX idx_reviews_product ON product_reviews(product_id);
+CREATE INDEX idx_reviews_approved ON product_reviews(is_approved) WHERE is_approved = TRUE;
+
+-- Full-text search index
+ALTER TABLE products ADD COLUMN search_vector tsvector;
+
+CREATE INDEX idx_products_search ON products USING GIN(search_vector);
+
+CREATE OR REPLACE FUNCTION products_search_trigger() RETURNS trigger AS $$
+BEGIN
+  NEW.search_vector :=
+    setweight(to_tsvector('english', COALESCE(NEW.name, '')), 'A') ||
+    setweight(to_tsvector('english', COALESCE(NEW.description, '')), 'B');
+  RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER products_search_update 
+BEFORE INSERT OR UPDATE ON products
+FOR EACH ROW EXECUTE FUNCTION products_search_trigger();
+
+-- Useful views
+CREATE VIEW product_stats AS
+SELECT 
+    p.id,
+    p.name,
+    p.price,
+    p.quantity,
+    COUNT(DISTINCT r.id) as review_count,
+    AVG(r.rating) as avg_rating,
+    COUNT(DISTINCT oi.id) as total_sold
+FROM products p
+LEFT JOIN product_reviews r ON p.id = r.product_id AND r.is_approved = TRUE
+LEFT JOIN order_items oi ON p.id = oi.product_id
+GROUP BY p.id, p.name, p.price, p.quantity;
+
+CREATE VIEW order_summary AS
+SELECT 
+    o.id,
+    o.order_number,
+    u.username,
+    u.email,
+    o.status,
+    o.total_amount,
+    o.created_at,
+    COUNT(oi.id) as item_count
+FROM orders o
+JOIN users u ON o.user_id = u.id
+LEFT JOIN order_items oi ON o.id = oi.order_id
+GROUP BY o.id, o.order_number, u.username, u.email, o.status, o.total_amount, o.created_at;
+
+-- Sample data
+INSERT INTO users (username, email, password_hash, first_name, last_name) VALUES
+('john_doe', 'john@example.com', 'hashed_password_1', 'John', 'Doe'),
+('jane_smith', 'jane@example.com', 'hashed_password_2', 'Jane', 'Smith'),
+('bob_wilson', 'bob@example.com', 'hashed_password_3', 'Bob', 'Wilson');
+
+INSERT INTO categories (name, slug, description) VALUES
+('Electronics', 'electronics', 'Electronic devices and accessories'),
+('Clothing', 'clothing', 'Apparel and fashion items'),
+('Books', 'books', 'Books and magazines');
+
+INSERT INTO products (name, slug, price, sku, quantity, category_id, description) VALUES
+('Laptop Pro 15', 'laptop-pro-15', 1299.99, 'LAPTOP-001', 50, 1, 'Professional laptop with high performance'),
+('Wireless Mouse', 'wireless-mouse', 29.99, 'MOUSE-001', 200, 1, 'Ergonomic wireless mouse'),
+('Cotton T-Shirt', 'cotton-tshirt', 19.99, 'SHIRT-001', 100, 2, 'Comfortable cotton t-shirt');
+```
+
+### Example 2: Advanced Query Examples
+
+```sql
+-- Complex analytics query
+WITH monthly_sales AS (
+    SELECT 
+        DATE_TRUNC('month', created_at) as month,
+        SUM(total_amount) as revenue,
+        COUNT(*) as order_count,
+        AVG(total_amount) as avg_order_value
+    FROM orders
+    WHERE status IN ('delivered', 'shipped')
+    GROUP BY DATE_TRUNC('month', created_at)
+),
+monthly_growth AS (
+    SELECT 
+        month,
+        revenue,
+        LAG(revenue) OVER (ORDER BY month) as previous_revenue,
+        ((revenue - LAG(revenue) OVER (ORDER BY month)) / 
+         LAG(revenue) OVER (ORDER BY month) * 100) as growth_rate
+    FROM monthly_sales
+)
+SELECT 
+    TO_CHAR(month, 'YYYY-MM') as month,
+    ROUND(revenue, 2) as revenue,
+    ROUND(previous_revenue, 2) as previous_revenue,
+    ROUND(growth_rate, 2) as growth_percentage
+FROM monthly_growth
+ORDER BY month DESC;
+
+-- Top selling products
+SELECT 
+    p.id,
+    p.name,
+    p.price,
+    COUNT(oi.id) as times_sold,
+    SUM(oi.quantity) as total_quantity,
+    SUM(oi.total) as total_revenue,
+    ROUND(AVG(r.rating), 2) as avg_rating,
+    COUNT(DISTINCT r.id) as review_count
+FROM products p
+JOIN order_items oi ON p.id = oi.product_id
+JOIN orders o ON oi.order_id = o.id
+LEFT JOIN product_reviews r ON p.id = r.product_id AND r.is_approved = TRUE
+WHERE o.status IN ('delivered', 'shipped')
+    AND o.created_at >= CURRENT_DATE - INTERVAL '30 days'
+GROUP BY p.id, p.name, p.price
+ORDER BY total_revenue DESC
+LIMIT 10;
+
+-- Customer lifetime value
+SELECT 
+    u.id,
+    u.username,
+    u.email,
+    COUNT(DISTINCT o.id) as total_orders,
+    SUM(o.total_amount) as lifetime_value,
+    AVG(o.total_amount) as avg_order_value,
+    MAX(o.created_at) as last_order_date,
+    EXTRACT(DAY FROM CURRENT_TIMESTAMP - MAX(o.created_at)) as days_since_last_order,
+    CASE 
+        WHEN EXTRACT(DAY FROM CURRENT_TIMESTAMP - MAX(o.created_at)) < 30 THEN 'Active'
+        WHEN EXTRACT(DAY FROM CURRENT_TIMESTAMP - MAX(o.created_at)) < 90 THEN 'At Risk'
+        ELSE 'Churned'
+    END as customer_status
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+WHERE u.status = 'active'
+GROUP BY u.id, u.username, u.email
+ORDER BY lifetime_value DESC;
+
+-- Inventory alert
+SELECT 
+    p.id,
+    p.name,
+    p.sku,
+    p.quantity as current_stock,
+    COALESCE(SUM(oi.quantity), 0) as sold_last_30_days,
+    ROUND(COALESCE(SUM(oi.quantity), 0) / 30.0, 2) as daily_avg_sales,
+    CASE 
+        WHEN p.quantity = 0 THEN 'OUT_OF_STOCK'
+        WHEN p.quantity < (COALESCE(SUM(oi.quantity), 0) / 30.0 * 7) THEN 'LOW_STOCK'
+        ELSE 'OK'
+    END as stock_status,
+    ROUND(p.quantity / NULLIF(COALESCE(SUM(oi.quantity), 0) / 30.0, 0), 1) as days_of_stock
+FROM products p
+LEFT JOIN order_items oi ON p.id = oi.product_id
+LEFT JOIN orders o ON oi.order_id = o.id 
+    AND o.created_at >= CURRENT_DATE - INTERVAL '30 days'
+    AND o.status IN ('delivered', 'shipped')
+WHERE p.is_active = TRUE
+GROUP BY p.id, p.name, p.sku, p.quantity
+HAVING p.quantity < (COALESCE(SUM(oi.quantity), 0) / 30.0 * 7) OR p.quantity = 0
+ORDER BY stock_status, days_of_stock;
+
+-- Product recommendations (collaborative filtering)
+WITH user_purchases AS (
+    SELECT DISTINCT
+        o.user_id,
+        oi.product_id
+    FROM orders o
+    JOIN order_items oi ON o.id = oi.order_id
+    WHERE o.status IN ('delivered', 'shipped')
+),
+similar_users AS (
+    SELECT 
+        up1.user_id as user1,
+        up2.user_id as user2,
+        COUNT(*) as common_products
+    FROM user_purchases up1
+    JOIN user_purchases up2 ON up1.product_id = up2.product_id
+        AND up1.user_id != up2.user_id
+    WHERE up1.user_id = 1  -- Target user
+    GROUP BY up1.user_id, up2.user_id
+    HAVING COUNT(*) >= 2
+)
+SELECT DISTINCT
+    p.id,
+    p.name,
+    p.price,
+    COUNT(DISTINCT su.user2) as recommended_by,
+    AVG(r.rating) as avg_rating
+FROM similar_users su
+JOIN user_purchases up ON su.user2 = up.user_id
+JOIN products p ON up.product_id = p.id
+LEFT JOIN product_reviews r ON p.id = r.product_id AND r.is_approved = TRUE
+WHERE NOT EXISTS (
+    SELECT 1 FROM user_purchases 
+    WHERE user_id = 1 AND product_id = p.id
+)
+AND p.is_active = TRUE
+GROUP BY p.id, p.name, p.price
+ORDER BY recommended_by DESC, avg_rating DESC
+LIMIT 10;
+```
+
+### Example 3: Performance Optimization
+
+```sql
+-- Query performance analysis
+EXPLAIN ANALYZE
+SELECT 
+    p.name,
+    p.price,
+    COUNT(oi.id) as sales_count
+FROM products p
+LEFT JOIN order_items oi ON p.id = oi.product_id
+GROUP BY p.id, p.name, p.price
+ORDER BY sales_count DESC;
+
+-- Create covering index
+CREATE INDEX idx_order_items_product_covering 
+ON order_items(product_id, id);
+
+-- Partition large table by date
+CREATE TABLE orders_partitioned (
+    LIKE orders INCLUDING ALL
+) PARTITION BY RANGE (created_at);
+
+CREATE TABLE orders_2023 PARTITION OF orders_partitioned
+    FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
+
+CREATE TABLE orders_2024 PARTITION OF orders_partitioned
+    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+
+-- Materialized view for complex aggregations
+CREATE MATERIALIZED VIEW daily_sales_summary AS
+SELECT 
+    DATE(created_at) as sale_date,
+    COUNT(DISTINCT id) as order_count,
+    SUM(total_amount) as total_revenue,
+    AVG(total_amount) as avg_order_value,
+    COUNT(DISTINCT user_id) as unique_customers
+FROM orders
+WHERE status IN ('delivered', 'shipped')
+GROUP BY DATE(created_at);
+
+CREATE UNIQUE INDEX ON daily_sales_summary (sale_date);
+
+-- Refresh materialized view
+REFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales_summary;
+
+-- Query optimization with CTEs
+WITH RECURSIVE category_tree AS (
+    -- Base case: root categories
+    SELECT id, name, parent_id, 1 as level, ARRAY[id] as path
+    FROM categories
+    WHERE parent_id IS NULL
+    
+    UNION ALL
+    
+    -- Recursive case: child categories
+    SELECT c.id, c.name, c.parent_id, ct.level + 1, ct.path || c.id
+    FROM categories c
+    JOIN category_tree ct ON c.parent_id = ct.id
+)
+SELECT 
+    REPEAT('  ', level - 1) || name as category_hierarchy,
+    level,
+    path
+FROM category_tree
+ORDER BY path;
+```
+
+### Example 4: Database Maintenance Scripts
+
+```sql
+-- Vacuum and analyze
+VACUUM ANALYZE products;
+VACUUM ANALYZE orders;
+
+-- Reindex
+REINDEX TABLE products;
+
+-- Update statistics
+ANALYZE products;
+
+-- Check table bloat
+SELECT 
+    schemaname,
+    tablename,
+    pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as total_size,
+    pg_size_pretty(pg_relation_size(schemaname||'.'||tablename)) as table_size,
+    pg_size_pretty(pg_indexes_size(schemaname||'.'||tablename)) as indexes_size
+FROM pg_tables
+WHERE schemaname = 'public'
+ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
+
+-- Find missing indexes
+SELECT 
+    schemaname,
+    tablename,
+    attname,
+    n_distinct,
+    correlation
+FROM pg_stats
+WHERE schemaname = 'public'
+    AND n_distinct > 100
+    AND correlation < 0.1
+ORDER BY n_distinct DESC;
+
+-- Identify slow queries
+SELECT 
+    query,
+    calls,
+    total_exec_time,
+    mean_exec_time,
+    max_exec_time,
+    stddev_exec_time
+FROM pg_stat_statements
+WHERE query NOT LIKE '%pg_%'
+ORDER BY mean_exec_time DESC
+LIMIT 20;
+
+-- Connection monitoring
+SELECT 
+    datname,
+    count(*) as connections,
+    max(backend_start) as oldest_connection
+FROM pg_stat_activity
+WHERE state = 'active'
+GROUP BY datname;
+
+-- Lock monitoring
+SELECT 
+    l.locktype,
+    l.database,
+    l.relation::regclass,
+    l.page,
+    l.tuple,
+    l.transactionid,
+    l.mode,
+    l.granted,
+    a.usename,
+    a.query,
+    a.query_start
+FROM pg_locks l
+JOIN pg_stat_activity a ON l.pid = a.pid
+WHERE NOT l.granted
+ORDER BY a.query_start;
+```
+
+### Example 5: Backup and Restore
+
+```bash
+# Full database backup
+pg_dump -U myuser -d mydb -F c -f backup_$(date +%Y%m%d).dump
+
+# Backup with compression
+pg_dump -U myuser -d mydb -F c -Z 9 -f backup_compressed.dump
+
+# Backup specific tables
+pg_dump -U myuser -d mydb -t products -t orders -F c -f tables_backup.dump
+
+# Backup schema only
+pg_dump -U myuser -d mydb --schema-only -f schema_backup.sql
+
+# Backup data only
+pg_dump -U myuser -d mydb --data-only -f data_backup.sql
+
+# Restore database
+pg_restore -U myuser -d mydb -c backup.dump
+
+# Restore specific tables
+pg_restore -U myuser -d mydb -t products backup.dump
+
+# Continuous archiving (PITR)
+# In postgresql.conf:
+# wal_level = replica
+# archive_mode = on
+# archive_command = 'cp %p /path/to/archive/%f'
+
+# Base backup
+pg_basebackup -U myuser -D /path/to/backup -F tar -z -P
+
+# Point-in-time recovery
+# Create recovery.conf:
+restore_command = 'cp /path/to/archive/%f %p'
+recovery_target_time = '2024-01-15 10:00:00'
+```
+
+### Example 6: Replication Setup
+
+```sql
+-- Primary server setup (postgresql.conf)
+-- wal_level = replica
+-- max_wal_senders = 3
+-- wal_keep_size = 64
+-- hot_standby = on
+
+-- Create replication user
+CREATE ROLE replicator WITH REPLICATION PASSWORD 'replicator_password' LOGIN;
+
+-- Configure pg_hba.conf
+-- host replication replicator replica_ip/32 md5
+
+-- On replica server:
+-- 1. Stop PostgreSQL
+-- 2. Clear data directory
+-- 3. Create base backup
+-- pg_basebackup -h primary_ip -D /var/lib/postgresql/data -U replicator -P -v -R -X stream -C -S replica_slot
+
+-- 4. Start PostgreSQL on replica
+
+-- Check replication status (on primary)
+SELECT * FROM pg_stat_replication;
+
+-- Check replica lag
+SELECT 
+    client_addr,
+    state,
+    sent_lsn,
+    write_lsn,
+    flush_lsn,
+    replay_lsn,
+    pg_wal_lsn_diff(sent_lsn, replay_lsn) as lag_bytes
+FROM pg_stat_replication;
+```
+
+### Example 7: Full-Text Search
+
+```sql
+-- Add full-text search column
+ALTER TABLE products ADD COLUMN search_vector tsvector;
+
+-- Update search vector
+UPDATE products 
+SET search_vector = 
+    setweight(to_tsvector('english', COALESCE(name, '')), 'A') ||
+    setweight(to_tsvector('english', COALESCE(description, '')), 'B');
+
+-- Create index
+CREATE INDEX idx_products_search ON products USING GIN(search_vector);
+
+-- Search query
+SELECT 
+    id,
+    name,
+    description,
+    ts_rank(search_vector, query) as rank
+FROM products, 
+     to_tsquery('english', 'laptop & wireless') as query
+WHERE search_vector @@ query
+ORDER BY rank DESC;
+
+-- Search with highlighting
+SELECT 
+    id,
+    name,
+    ts_headline('english', description, query, 'MaxWords=20, MinWords=10') as highlighted
+FROM products,
+     to_tsquery('english', 'laptop & gaming') as query
+WHERE search_vector @@ query;
+
+-- Fuzzy search
+SELECT 
+    id,
+    name,
+    similarity(name, 'lapton') as similarity_score
+FROM products
+WHERE similarity(name, 'lapton') > 0.3
+ORDER BY similarity_score DESC;
+
+-- Create GIN index for similarity
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE INDEX idx_products_name_trgm ON products USING GIN(name gin_trgm_ops);
+```
+
+### Example 8: JSON Operations
+
+```sql
+-- Create table with JSONB
+CREATE TABLE user_preferences (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    settings JSONB NOT NULL DEFAULT '{}',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert JSON data
+INSERT INTO user_preferences (user_id, settings) VALUES
+(1, '{"theme": "dark", "notifications": {"email": true, "push": false}, "language": "en"}'),
+(2, '{"theme": "light", "notifications": {"email": false, "push": true}, "language": "es"}');
+
+-- Query JSON fields
+SELECT 
+    user_id,
+    settings->>'theme' as theme,
+    settings->'notifications'->>'email' as email_notifications
+FROM user_preferences;
+
+-- Query nested JSON
+SELECT * FROM user_preferences
+WHERE settings->'notifications'->>'email' = 'true';
+
+-- Update JSON field
+UPDATE user_preferences
+SET settings = jsonb_set(settings, '{theme}', '"dark"')
+WHERE user_id = 2;
+
+-- Add new JSON field
+UPDATE user_preferences
+SET settings = settings || '{"timezone": "UTC"}'::jsonb
+WHERE user_id = 1;
+
+-- Remove JSON field
+UPDATE user_preferences
+SET settings = settings - 'timezone'
+WHERE user_id = 1;
+
+-- Query JSON array
+CREATE TABLE products_with_tags (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    tags JSONB
+);
+
+INSERT INTO products_with_tags (name, tags) VALUES
+('Product A', '["electronics", "gaming", "featured"]'),
+('Product B', '["clothing", "sale"]');
+
+-- Query if array contains element
+SELECT * FROM products_with_tags
+WHERE tags ? 'gaming';
+
+-- Query if array contains any of elements
+SELECT * FROM products_with_tags
+WHERE tags ?| array['gaming', 'sale'];
+
+-- Create GIN index for JSON
+CREATE INDEX idx_user_preferences_settings 
+ON user_preferences USING GIN(settings);
+
+-- Aggregate JSON
+SELECT 
+    jsonb_agg(jsonb_build_object(
+        'id', id,
+        'name', name,
+        'price', price
+    )) as products
+FROM products
+WHERE category_id = 1;
+```
+
+### Example 9: Triggers and Functions
+
+```sql
+-- Audit log trigger
+CREATE TABLE audit_log (
+    id SERIAL PRIMARY KEY,
+    table_name VARCHAR(50) NOT NULL,
+    record_id INTEGER NOT NULL,
+    action VARCHAR(10) NOT NULL,
+    old_data JSONB,
+    new_data JSONB,
+    changed_by VARCHAR(50),
+    changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE OR REPLACE FUNCTION audit_trigger_func()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        INSERT INTO audit_log (table_name, record_id, action, new_data, changed_by)
+        VALUES (TG_TABLE_NAME, NEW.id, 'INSERT', row_to_json(NEW)::jsonb, current_user);
+        RETURN NEW;
+    ELSIF TG_OP = 'UPDATE' THEN
+        INSERT INTO audit_log (table_name, record_id, action, old_data, new_data, changed_by)
+        VALUES (TG_TABLE_NAME, NEW.id, 'UPDATE', row_to_json(OLD)::jsonb, row_to_json(NEW)::jsonb, current_user);
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        INSERT INTO audit_log (table_name, record_id, action, old_data, changed_by)
+        VALUES (TG_TABLE_NAME, OLD.id, 'DELETE', row_to_json(OLD)::jsonb, current_user);
+        RETURN OLD;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Apply trigger to tables
+CREATE TRIGGER products_audit_trigger
+AFTER INSERT OR UPDATE OR DELETE ON products
+FOR EACH ROW EXECUTE FUNCTION audit_trigger_func();
+
+CREATE TRIGGER users_audit_trigger
+AFTER INSERT OR UPDATE OR DELETE ON users
+FOR EACH ROW EXECUTE FUNCTION audit_trigger_func();
+
+-- Auto-update timestamp trigger
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_products_updated_at
+BEFORE UPDATE ON products
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Inventory management trigger
+CREATE OR REPLACE FUNCTION update_product_inventory()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        -- Reduce inventory when order is created
+        UPDATE products
+        SET quantity = quantity - NEW.quantity
+        WHERE id = NEW.product_id;
+        
+        IF NOT FOUND OR (SELECT quantity FROM products WHERE id = NEW.product_id) < 0 THEN
+            RAISE EXCEPTION 'Insufficient inventory for product %', NEW.product_id;
+        END IF;
+    ELSIF TG_OP = 'DELETE' THEN
+        -- Restore inventory when order is cancelled
+        UPDATE products
+        SET quantity = quantity + OLD.quantity
+        WHERE id = OLD.product_id;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER order_items_inventory_trigger
+AFTER INSERT OR DELETE ON order_items
+FOR EACH ROW EXECUTE FUNCTION update_product_inventory();
+```
+
+### Example 10: Connection Pooling with PgBouncer
+
+**pgbouncer.ini:**
+```ini
+[databases]
+mydb = host=localhost port=5432 dbname=mydb
+
+[pgbouncer]
+listen_port = 6432
+listen_addr = *
+auth_type = md5
+auth_file = /etc/pgbouncer/userlist.txt
+pool_mode = transaction
+max_client_conn = 1000
+default_pool_size = 25
+min_pool_size = 10
+reserve_pool_size = 5
+reserve_pool_timeout = 3
+max_db_connections = 100
+log_connections = 1
+log_disconnections = 1
+log_pooler_errors = 1
+```
+
+**userlist.txt:**
+```
+"myuser" "md5_hashed_password"
+```
+
+**Start PgBouncer:**
+```bash
+pgbouncer -d /etc/pgbouncer/pgbouncer.ini
+```
+
+**Connect through PgBouncer:**
+```bash
+psql -h localhost -p 6432 -U myuser mydb
+```
+
 ## Troubleshooting
 
 ### Common Issues

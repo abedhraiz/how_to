@@ -1048,6 +1048,652 @@ npx husky add .husky/pre-commit "npm test"
 npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 ```
 
+## Workflow Examples
+
+### GitFlow Workflow
+
+```bash
+# Initialize GitFlow
+git flow init
+
+# Or manually:
+git branch develop
+git checkout develop
+
+# Start a new feature
+git flow feature start user-authentication
+# Or: git checkout -b feature/user-authentication develop
+
+# Work on feature
+git add .
+git commit -m "feat: add user authentication"
+
+# Finish feature
+git flow feature finish user-authentication
+# Or manually:
+git checkout develop
+git merge --no-ff feature/user-authentication
+git branch -d feature/user-authentication
+
+# Start a release
+git flow release start 1.0.0
+# Or: git checkout -b release/1.0.0 develop
+
+# Update version numbers, changelog
+git add .
+git commit -m "chore: prepare release 1.0.0"
+
+# Finish release
+git flow release finish 1.0.0
+# Or manually:
+git checkout main
+git merge --no-ff release/1.0.0
+git tag -a v1.0.0 -m "Release version 1.0.0"
+git checkout develop
+git merge --no-ff release/1.0.0
+git branch -d release/1.0.0
+
+# Hotfix for production
+git flow hotfix start 1.0.1
+# Or: git checkout -b hotfix/1.0.1 main
+
+# Fix the bug
+git add .
+git commit -m "fix: critical security patch"
+
+# Finish hotfix
+git flow hotfix finish 1.0.1
+# Merges to main and develop, creates tag
+
+# Push everything
+git push origin main develop --tags
+```
+
+### GitHub Flow
+
+```bash
+# 1. Always work from main branch
+git checkout main
+git pull origin main
+
+# 2. Create a descriptive branch
+git checkout -b add-payment-gateway
+
+# 3. Make commits with clear messages
+git add src/payment.js
+git commit -m "feat: integrate Stripe payment gateway"
+
+git add tests/payment.test.js
+git commit -m "test: add payment gateway tests"
+
+# 4. Push branch and open pull request
+git push -u origin add-payment-gateway
+
+# On GitHub, open Pull Request
+# Add description, request reviews
+
+# 5. After review and CI passes, merge to main
+# (Done via GitHub UI with "Squash and merge" or "Merge commit")
+
+# 6. Delete branch after merge
+git checkout main
+git pull origin main
+git branch -d add-payment-gateway
+git push origin --delete add-payment-gateway
+```
+
+### Trunk-Based Development
+
+```bash
+# Always work on main (trunk)
+git checkout main
+git pull origin main
+
+# Create short-lived feature branch
+git checkout -b feature-xyz
+
+# Make small, incremental changes
+git add .
+git commit -m "feat: add user profile endpoint"
+git push origin feature-xyz
+
+# Immediately create PR and merge (within hours)
+# After merge, delete branch
+git checkout main
+git pull origin main
+git branch -d feature-xyz
+
+# Or commit directly to main for small changes
+git checkout main
+git pull origin main
+# Make changes
+git add .
+git commit -m "fix: typo in documentation"
+git push origin main
+
+# Feature flags for incomplete features
+# config.js
+const features = {
+  newUI: process.env.ENABLE_NEW_UI === 'true',
+  payments: process.env.ENABLE_PAYMENTS === 'true'
+};
+
+# Code
+if (features.newUI) {
+  // New UI code
+} else {
+  // Old UI code
+}
+```
+
+### Advanced Rebase Examples
+
+```bash
+# Interactive rebase to clean history
+git checkout feature-branch
+git rebase -i HEAD~5
+
+# In editor, you can:
+# pick = keep commit
+# reword = keep commit but edit message  
+# edit = keep commit but stop for amending
+# squash = combine with previous commit
+# fixup = like squash but discard message
+# drop = remove commit
+
+# Example:
+pick abc1234 feat: add login
+squash def5678 fix: login validation
+reword ghi9012 feat: add logout
+drop jkl3456 wip: testing
+pick mno7890 docs: update README
+
+# Rebase onto another branch
+git checkout feature-branch
+git rebase main
+
+# If conflicts occur:
+git status  # See conflicting files
+# Fix conflicts in files
+git add <resolved-files>
+git rebase --continue
+
+# Or skip a commit
+git rebase --skip
+
+# Or abort rebase
+git rebase --abort
+
+# Rebase and update remote
+git push origin feature-branch --force-with-lease
+
+# Autosquash commits
+git commit --fixup=abc1234  # Creates fixup commit
+git rebase -i --autosquash HEAD~10  # Automatically squashes fixups
+```
+
+### Cherry-Pick Examples
+
+```bash
+# Pick single commit from another branch
+git checkout main
+git cherry-pick abc1234
+
+# Pick multiple commits
+git cherry-pick abc1234 def5678 ghi9012
+
+# Pick a range of commits
+git cherry-pick abc1234^..ghi9012
+
+# Cherry-pick without committing (for review)
+git cherry-pick -n abc1234
+
+# Cherry-pick and edit commit message
+git cherry-pick -e abc1234
+
+# Resolve conflicts during cherry-pick
+# Fix conflicts
+git add <files>
+git cherry-pick --continue
+
+# Or abort
+git cherry-pick --abort
+
+# Example: backport fix to release branch
+git checkout release/1.0
+git cherry-pick abc1234  # Commit from main
+git push origin release/1.0
+```
+
+### Git Bisect Examples
+
+```bash
+# Find the commit that introduced a bug
+git bisect start
+
+# Mark current commit as bad
+git bisect bad
+
+# Mark a known good commit
+git bisect good v1.0.0
+
+# Git will checkout a commit in between
+# Test if bug exists
+
+# If bug exists:
+git bisect bad
+
+# If bug doesn't exist:
+git bisect good
+
+# Continue until Git finds the problematic commit
+
+# Automate bisect with a script
+git bisect start HEAD v1.0.0
+git bisect run npm test
+
+# Git will automatically test each commit
+# and find the first bad commit
+
+# When done
+git bisect reset
+
+# Example: find when tests started failing
+git bisect start
+git bisect bad HEAD
+git bisect good v2.0.0
+git bisect run sh -c "npm install && npm test"
+```
+
+### Submodules Workflow
+
+```bash
+# Add a submodule
+git submodule add https://github.com/user/library.git libs/library
+
+# This creates .gitmodules file
+# And adds the submodule
+
+# Clone repository with submodules
+git clone --recursive https://github.com/user/repo.git
+
+# Or if already cloned:
+git submodule init
+git submodule update
+
+# Update submodule to latest
+cd libs/library
+git fetch
+git checkout main
+git pull
+cd ../..
+git add libs/library
+git commit -m "chore: update library submodule"
+
+# Update all submodules
+git submodule update --remote --merge
+
+# Remove a submodule
+git submodule deinit libs/library
+git rm libs/library
+rm -rf .git/modules/libs/library
+git commit -m "chore: remove library submodule"
+```
+
+### Subtree Workflow
+
+```bash
+# Add a subtree (better than submodules for most cases)
+git subtree add --prefix=libs/library \
+  https://github.com/user/library.git main --squash
+
+# Pull updates from subtree
+git subtree pull --prefix=libs/library \
+  https://github.com/user/library.git main --squash
+
+# Push changes back to subtree repository
+git subtree push --prefix=libs/library \
+  https://github.com/user/library.git main
+
+# Split subtree into separate repository
+git subtree split --prefix=libs/library -b library-only
+
+# Create new repository with the subtree
+git push https://github.com/user/new-library.git library-only:main
+```
+
+### Worktree Examples
+
+```bash
+# Work on multiple branches simultaneously
+git worktree add ../project-feature feature-branch
+
+# This creates a new working directory
+# You can work on feature-branch there while
+# main directory stays on main branch
+
+# List worktrees
+git worktree list
+
+# Remove worktree when done
+git worktree remove ../project-feature
+
+# Or prune deleted worktrees
+git worktree prune
+
+# Example: hotfix while working on feature
+# In main project directory
+git worktree add ../project-hotfix hotfix/1.0.1
+
+# Work on hotfix in ../project-hotfix
+cd ../project-hotfix
+# Make fixes
+git add .
+git commit -m "fix: critical bug"
+git push origin hotfix/1.0.1
+
+# Return to feature work
+cd ../project
+# Your feature branch is unchanged
+```
+
+### Reflog Examples
+
+```bash
+# View reflog (history of HEAD)
+git reflog
+
+# Output like:
+# abc1234 HEAD@{0}: commit: feat: add feature
+# def5678 HEAD@{1}: checkout: moving from main to feature
+# ghi9012 HEAD@{2}: pull: Fast-forward
+
+# Recover deleted branch
+git branch feature-branch HEAD@{1}
+
+# Undo a reset
+git reset --hard abc1234
+# Oops, that was wrong
+git reflog
+git reset --hard HEAD@{1}
+
+# Find lost commits
+git reflog show --all
+git cherry-pick <lost-commit-hash>
+
+# Recover after accidental branch delete
+git reflog
+# Find the commit where branch was
+git checkout -b recovered-branch <commit-hash>
+
+# Reflog expires after 90 days by default
+# View reflog expiry settings
+git config --get gc.reflogExpire
+```
+
+### Large File Management (Git LFS)
+
+```bash
+# Install Git LFS
+git lfs install
+
+# Track large files
+git lfs track "*.psd"
+git lfs track "*.mp4"
+git lfs track "design/**"
+
+# This creates/updates .gitattributes
+git add .gitattributes
+
+# Add and commit large files normally
+git add design/mockup.psd
+git commit -m "docs: add design mockup"
+git push origin main
+
+# Clone repository with LFS files
+git lfs clone https://github.com/user/repo.git
+
+# Pull LFS files
+git lfs pull
+
+# View LFS files
+git lfs ls-files
+
+# Fetch LFS files for specific branch
+git lfs fetch origin main
+
+# Migrate existing files to LFS
+git lfs migrate import --include="*.psd"
+
+# Untrack LFS files
+git lfs untrack "*.psd"
+```
+
+### Monorepo Strategies
+
+```bash
+# Sparse checkout - only checkout specific directories
+git clone --no-checkout https://github.com/user/monorepo.git
+cd monorepo
+
+git sparse-checkout init --cone
+git sparse-checkout set packages/api packages/shared
+
+git checkout main
+
+# Now only packages/api and packages/shared are checked out
+
+# Add more paths
+git sparse-checkout add packages/frontend
+
+# Disable sparse checkout
+git sparse-checkout disable
+
+# Partial clone - download objects on demand
+git clone --filter=blob:none https://github.com/user/monorepo.git
+```
+
+### Multi-Remote Workflow
+
+```bash
+# Add multiple remotes
+git remote add origin https://github.com/user/repo.git
+git remote add upstream https://github.com/original/repo.git
+git remote add staging https://github.com/company/staging.git
+
+# Fetch from all remotes
+git fetch --all
+
+# Push to multiple remotes
+git push origin main
+git push staging main
+
+# Set up to push to multiple remotes at once
+git remote set-url --add --push origin https://github.com/user/repo.git
+git remote set-url --add --push origin https://gitlab.com/user/repo.git
+
+# Now git push origin main pushes to both
+
+# Pull from upstream, push to origin
+git fetch upstream
+git merge upstream/main
+git push origin main
+
+# Or rebase
+git pull --rebase upstream main
+git push origin main
+```
+
+### Release Management
+
+```bash
+# Semantic versioning tags
+git tag -a v1.0.0 -m "Release version 1.0.0"
+git tag -a v1.1.0 -m "Release version 1.1.0 - Added feature X"
+git tag -a v1.1.1 -m "Release version 1.1.1 - Bugfix"
+
+# Push tags
+git push origin --tags
+
+# List tags
+git tag -l
+
+# List tags matching pattern
+git tag -l "v1.*"
+
+# Checkout specific tag
+git checkout v1.0.0
+
+# Create branch from tag
+git checkout -b hotfix/1.0.1 v1.0.0
+
+# Delete tag locally
+git tag -d v1.0.0
+
+# Delete tag remotely
+git push origin :refs/tags/v1.0.0
+
+# Signed tags (GPG)
+git tag -s v1.0.0 -m "Signed release"
+
+# Verify signed tag
+git tag -v v1.0.0
+
+# Generate changelog between tags
+git log v1.0.0..v1.1.0 --oneline --decorate
+
+# Or use conventional commits
+git log v1.0.0..HEAD --pretty=format:"%s" | \
+  grep "^feat:" | sed 's/^feat: /- /'
+```
+
+### Git Hooks Advanced
+
+```bash
+# Server-side pre-receive hook
+# .git/hooks/pre-receive
+#!/bin/bash
+
+while read oldrev newrev refname; do
+  # Prevent force push to main
+  if [ "$refname" = "refs/heads/main" ]; then
+    if [ "$oldrev" != "0000000000000000000000000000000000000000" ]; then
+      merge_base=$(git merge-base $oldrev $newrev)
+      if [ "$merge_base" != "$oldrev" ]; then
+        echo "Force push to main is not allowed"
+        exit 1
+      fi
+    fi
+  fi
+  
+  # Check commit messages
+  commits=$(git rev-list $oldrev..$newrev)
+  for commit in $commits; do
+    message=$(git log --format=%B -n 1 $commit)
+    if ! echo "$message" | grep -qE "^(feat|fix|docs|style|refactor|test|chore):"; then
+      echo "Invalid commit message format in $commit"
+      exit 1
+    fi
+  done
+done
+
+# Pre-commit: run tests and linting
+# .git/hooks/pre-commit
+#!/bin/bash
+
+echo "Running tests..."
+npm test
+if [ $? -ne 0 ]; then
+  echo "Tests failed. Commit aborted."
+  exit 1
+fi
+
+echo "Running linter..."
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "Linting failed. Commit aborted."
+  exit 1
+fi
+
+# Check for secrets
+if git diff --cached | grep -iE "(password|api_key|secret|token)\s*="; then
+  echo "Possible secret detected. Commit aborted."
+  exit 1
+fi
+
+echo "Pre-commit checks passed!"
+exit 0
+
+# Commit-msg: enforce commit message format
+# .git/hooks/commit-msg
+#!/bin/bash
+
+commit_msg=$(cat "$1")
+
+# Check conventional commits format
+if ! echo "$commit_msg" | grep -qE "^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?: .+"; then
+  echo "Error: Commit message must follow Conventional Commits format"
+  echo "Format: type(scope?): description"
+  echo "Example: feat(auth): add OAuth2 support"
+  exit 1
+fi
+
+# Check message length
+if [ ${#commit_msg} -gt 72 ]; then
+  echo "Error: Commit message must be 72 characters or less"
+  exit 1
+fi
+
+exit 0
+```
+
+### Conflict Resolution Strategies
+
+```bash
+# When merge conflict occurs
+git status  # Shows conflicting files
+
+# Open conflicting file:
+<<<<<<< HEAD
+Your changes
+=======
+Their changes
+>>>>>>> branch-name
+
+# Strategy 1: Manual resolution
+# Edit file to resolve conflicts
+git add <resolved-file>
+git commit
+
+# Strategy 2: Use ours or theirs
+git checkout --ours <file>   # Keep your version
+git checkout --theirs <file>  # Use their version
+git add <file>
+
+# Strategy 3: Use merge tool
+git mergetool
+
+# Strategy 4: Accept all from one side
+git merge -X ours branch-name    # Prefer your changes
+git merge -X theirs branch-name  # Prefer their changes
+
+# View conflict in different layouts
+git diff --name-only --diff-filter=U  # List conflicting files
+git diff --check  # Show conflict markers
+
+# Abort merge if too complex
+git merge --abort
+
+# For rebase conflicts
+git rebase --abort
+
+# Continue after resolving
+git rebase --continue
+
+# Skip problematic commit
+git rebase --skip
+```
+
 ## Performance Tips
 
 ```bash

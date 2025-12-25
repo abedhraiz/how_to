@@ -1,0 +1,74 @@
+name: Welcome First-Time Contributors
+
+# Welcomes first-time contributors with a friendly message
+on:
+  pull_request_target:
+    types: [opened]
+  issues:
+    types: [opened]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    
+    steps:
+    - name: Welcome first-time contributors
+      uses: actions/github-script@v7
+      with:
+        script: |
+          // Get all contributors
+          const { data: contributors } = await github.rest.repos.listContributors({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+          });
+          
+          const contributorLogins = contributors.map(c => c.login);
+          const author = context.payload.sender.login;
+          
+          // Check if this is a first-time contributor
+          if (!contributorLogins.includes(author)) {
+            let message;
+            
+            if (context.eventName === 'pull_request_target') {
+              message = `👋 Hello @${author}! Thank you for your first pull request to this project!
+              
+              We appreciate your contribution to improving our documentation. A maintainer will review your PR soon.
+              
+              **A few things to note:**
+              - Make sure your changes follow our documentation style
+              - Check that all links are working
+              - Ensure your markdown is properly formatted
+              
+              If you have any questions, feel free to ask in the comments.
+              
+              Thanks again for contributing! 🎉`;
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: message,
+              });
+            } else if (context.eventName === 'issues') {
+              message = `👋 Hello @${author}! Thank you for opening your first issue!
+              
+              We appreciate you taking the time to help improve our documentation project.
+              
+              A maintainer will review your issue soon. In the meantime:
+              - Make sure you've provided enough context
+              - If it's a bug, include steps to reproduce
+              - If it's a feature request, explain the use case
+              
+              Thanks for your contribution! 🎉`;
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: message,
+              });
+            }
+          }

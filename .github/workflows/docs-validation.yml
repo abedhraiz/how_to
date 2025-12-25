@@ -1,0 +1,157 @@
+name: Documentation Validation
+
+# Validates documentation structure and content
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'NAVIGATION.md'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'NAVIGATION.md'
+  workflow_dispatch:
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Validate required files exist
+      run: |
+        echo "Checking required documentation files..."
+        
+        required_files=(
+          "README.md"
+          "NAVIGATION.md"
+          "docs/project-meta/README.md"
+          "docs/infrastructure-devops/README.md"
+          "docs/cloud-platforms/README.md"
+          "docs/data-engineering/README.md"
+          "docs/cicd-automation/README.md"
+          "docs/monitoring-observability/README.md"
+          "docs/databases/README.md"
+          "docs/version-control/README.md"
+          "docs/ai-ml-frameworks/README.md"
+        )
+        
+        missing_files=()
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            missing_files+=("$file")
+          fi
+        done
+        
+        if [ ${#missing_files[@]} -gt 0 ]; then
+          echo "❌ Missing required files:"
+          printf '%s\n' "${missing_files[@]}"
+          exit 1
+        else
+          echo "✅ All required files exist"
+        fi
+    
+    - name: Check for broken internal links
+      run: |
+        echo "Checking for broken internal links..."
+        
+        # Find all markdown files
+        md_files=$(find . -name "*.md" -not -path "./node_modules/*" -not -path "./.git/*")
+        
+        broken_links=0
+        
+        for file in $md_files; do
+          # Extract markdown links [text](path)
+          links=$(grep -oP '\[.*?\]\(\K[^)]+' "$file" 2>/dev/null || true)
+          
+          for link in $links; do
+            # Skip external links (http/https)
+            if [[ $link =~ ^https?:// ]]; then
+              continue
+            fi
+            
+            # Skip anchors only
+            if [[ $link =~ ^# ]]; then
+              continue
+            fi
+            
+            # Remove anchor from path
+            link_path="${link%%#*}"
+            
+            # Skip empty paths
+            if [ -z "$link_path" ]; then
+              continue
+            fi
+            
+            # Resolve relative path
+            dir=$(dirname "$file")
+            full_path="$dir/$link_path"
+            
+            # Normalize path
+            full_path=$(realpath -m "$full_path" 2>/dev/null || echo "$full_path")
+            
+            # Check if file exists
+            if [ ! -f "$full_path" ] && [ ! -d "$full_path" ]; then
+              echo "❌ Broken link in $file: $link"
+              broken_links=$((broken_links + 1))
+            fi
+          done
+        done
+        
+        if [ $broken_links -gt 0 ]; then
+          echo "Found $broken_links broken internal link(s)"
+          exit 1
+        else
+          echo "✅ No broken internal links found"
+        fi
+    
+    - name: Validate directory structure
+      run: |
+        echo "Validating directory structure..."
+        
+        expected_dirs=(
+          "docs/project-meta"
+          "docs/infrastructure-devops"
+          "docs/cloud-platforms"
+          "docs/data-engineering"
+          "docs/cicd-automation"
+          "docs/monitoring-observability"
+          "docs/databases"
+          "docs/version-control"
+          "docs/ai-ml-frameworks"
+        )
+        
+        missing_dirs=()
+        for dir in "${expected_dirs[@]}"; do
+          if [ ! -d "$dir" ]; then
+            missing_dirs+=("$dir")
+          fi
+        done
+        
+        if [ ${#missing_dirs[@]} -gt 0 ]; then
+          echo "❌ Missing required directories:"
+          printf '%s\n' "${missing_dirs[@]}"
+          exit 1
+        else
+          echo "✅ All required directories exist"
+        fi
+    
+    - name: Generate documentation stats
+      run: |
+        echo "📊 Documentation Statistics"
+        echo "=========================="
+        echo ""
+        echo "Total markdown files: $(find docs/ -name '*.md' | wc -l)"
+        echo "Total lines of documentation: $(find docs/ -name '*.md' -exec wc -l {} + | tail -1 | awk '{print $1}')"
+        echo ""
+        echo "Files by category:"
+        for dir in docs/*/; do
+          count=$(find "$dir" -name '*.md' | wc -l)
+          echo "  - $(basename "$dir"): $count files"
+        done

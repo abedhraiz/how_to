@@ -1,0 +1,94 @@
+name: Spell Check
+
+# Checks spelling in markdown files
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.md'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install cspell
+      run: npm install -g cspell
+    
+    - name: Run spell check
+      run: |
+        echo "Running spell check on markdown files..."
+        
+        # Create a basic cspell config if it doesn't exist
+        if [ ! -f ".cspell.json" ]; then
+          cat > .cspell.json << 'EOF'
+        {
+          "version": "0.2",
+          "language": "en",
+          "words": [
+            "kubernetes",
+            "terraform",
+            "ansible",
+            "docker",
+            "postgres",
+            "postgresql",
+            "graphql",
+            "microservices",
+            "devops",
+            "cicd",
+            "github",
+            "gitlab",
+            "jenkins",
+            "prometheus",
+            "grafana",
+            "langchain",
+            "pytorch",
+            "tensorflow",
+            "onnx",
+            "tensorrt",
+            "mlops",
+            "wandb",
+            "airflow",
+            "kafka",
+            "snowflake",
+            "databricks",
+            "kubectl",
+            "yaml",
+            "json",
+            "htop",
+            "nginx",
+            "linux",
+            "ubuntu",
+            "apis",
+            "cpu",
+            "gpu",
+            "tpu",
+            "llm",
+            "llms"
+          ],
+          "ignorePaths": [
+            "node_modules/**",
+            ".git/**",
+            "*.json",
+            "*.yml",
+            "*.yaml"
+          ]
+        }
+        EOF
+        fi
+        
+        # Run cspell on all markdown files
+        cspell "**/*.md" --no-progress || echo "⚠️ Spelling issues found. Review the output above."

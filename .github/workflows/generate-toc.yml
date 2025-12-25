@@ -1,0 +1,60 @@
+name: Generate Table of Contents
+
+# Automatically generates/updates TOC in markdown files
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**/*.md'
+  workflow_dispatch:
+
+jobs:
+  generate-toc:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install markdown-toc
+      run: npm install -g markdown-toc
+    
+    - name: Generate TOC for README files
+      run: |
+        echo "Generating table of contents..."
+        
+        # Find all README.md files in docs/
+        readmes=$(find docs/ -name "README.md")
+        
+        for file in $readmes; do
+          echo "Processing $file..."
+          
+          # Check if file has TOC markers
+          if grep -q "<!-- toc -->" "$file" && grep -q "<!-- tocstop -->" "$file"; then
+            markdown-toc -i "$file"
+            echo "✅ Updated TOC in $file"
+          else
+            echo "ℹ️ Skipping $file (no TOC markers found)"
+          fi
+        done
+    
+    - name: Commit and push if changed
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        
+        if git diff --quiet; then
+          echo "No changes to commit"
+        else
+          git add docs/
+          git commit -m "chore: auto-update table of contents [skip ci]"
+          git push
+          echo "✅ TOC updates committed and pushed"
+        fi
