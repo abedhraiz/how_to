@@ -78,6 +78,13 @@ All guides include comprehensive, production-ready examples you can use immediat
 
 ## 🗂️ Documentation Structure
 
+### 📐 [System Design & Architecture](docs/system-design/README.md)
+Master the principles of building scalable, reliable, and maintainable distributed systems.
+
+- **[Distributed Systems Patterns](docs/system-design/distributed-systems-patterns.md)** - Circuit Breakers, CQRS, Sagas
+- **[Scalability & Performance](docs/system-design/scalability-guide.md)** - Caching, Sharding, CAP Theorem
+- **[Diagramming](docs/system-design/diagramming-guide.md)** - C4 Model, Mermaid.js
+
 ### 🏗️ [Infrastructure & DevOps](docs/infrastructure-devops/README.md)
 Build, deploy, and manage scalable infrastructure.
 
@@ -130,7 +137,16 @@ Production LLM systems, AI leadership, and advanced ML operations.
 ### 🔄 [CI/CD & Automation](docs/cicd-automation/README.md)
 Automate software delivery and infrastructure deployments.
 
+- **[GitHub Actions](docs/cicd-automation/github-actions/github-actions-guide.md)** - Native GitHub CI/CD
 - **[Jenkins](docs/cicd-automation/jenkins/jenkins-guide.md)** - CI/CD Automation Server
+- **[n8n](docs/cicd-automation/workflow-automation/n8n-guide.md)** - Workflow Automation
+
+### 🛡️ [Security & DevSecOps](docs/security/README.md)
+Integrate security into every stage of the software development lifecycle.
+
+- **[AppSec Guide](docs/security/appsec-guide.md)** - OWASP Top 10, Input Validation
+- **[Secrets Management](docs/security/secrets-management.md)** - Safe handling of credentials
+- **[DevSecOps](docs/security/devsecops-guide.md)** - Security in CI/CD pipelines
 
 ### 🐍 [Python Automation](docs/python-automation/README.md)
 Automate scripts, CLIs, scheduled jobs, and integrations.
@@ -141,8 +157,6 @@ Automate scripts, CLIs, scheduled jobs, and integrations.
 Business metrics, product strategy, and project leadership.
 
 - **[Business Strategy Guide](docs/business-strategy/business-strategy-guide.md)** - ROI, TCO, KPIs, OKRs, MVP/MVE/MLP, Product-Market Fit, GTM, P&L
-- **[GitHub Actions](docs/cicd-automation/github-actions/github-actions-guide.md)** - Native GitHub CI/CD
-- **[n8n](docs/cicd-automation/workflow-automation/n8n-guide.md)** - Workflow Automation
 
 ### 📊 [Monitoring & Observability](docs/monitoring-observability/README.md)
 Monitor infrastructure, applications, and services.

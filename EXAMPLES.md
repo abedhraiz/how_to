@@ -5,6 +5,8 @@ This document provides a curated index of all practical, real-world examples ava
 ## Table of Contents
 
 - [🤖 AI/ML Engineering (NEW)](#aiml-engineering)
+- [System Design & Architecture](#system-design--architecture)
+- [Security & DevSecOps](#security--devsecops)
 - [Infrastructure & DevOps](#infrastructure--devops)
 - [Databases](#databases)
 - [Monitoring & Observability](#monitoring--observability)
@@ -170,6 +172,47 @@ This document provides a curated index of all practical, real-world examples ava
 | Feature Stores | 🔴 Advanced | Enterprise ML systems |
 | ML Observability | 🟡 Intermediate | Production monitoring |
 | ML Testing | 🟡 Intermediate | Quality assurance |
+
+---
+
+## System Design & Architecture
+
+### Distributed Systems Patterns
+
+**Location**: [docs/system-design/distributed-systems-patterns.md](docs/system-design/distributed-systems-patterns.md)
+
+1. **Circuit Breaker** - Python implementation of resilience pattern.
+2. **Saga Pattern** - Managing distributed transactions.
+
+### Scalability Guide
+
+**Location**: [docs/system-design/scalability-guide.md](docs/system-design/scalability-guide.md)
+
+1. **Caching Strategies** - Cache-Aside, Write-Through patterns.
+2. **Sharding** - Database partitioning strategies.
+
+### Diagramming
+
+**Location**: [docs/system-design/diagramming-guide.md](docs/system-design/diagramming-guide.md)
+
+1. **Mermaid.js Examples** - Sequence diagrams and flowcharts as code.
+
+---
+
+## Security & DevSecOps
+
+### AppSec Guide
+
+**Location**: [docs/security/appsec-guide.md](docs/security/appsec-guide.md)
+
+1. **Input Validation** - Sanitization and encoding examples.
+2. **OWASP Top 10** - Mitigation strategies.
+
+### DevSecOps Pipeline
+
+**Location**: [docs/security/devsecops-guide.md](docs/security/devsecops-guide.md)
+
+1. **GitHub Actions Security Workflow** - SAST (Semgrep) and SCA (Trivy) integration.
 
 ---
 

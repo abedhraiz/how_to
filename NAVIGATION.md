@@ -15,6 +15,19 @@
 
 ## Browse by Category
 
+### 📐 System Design & Architecture
+**Path**: [`docs/system-design/`](./docs/system-design/README.md)
+
+Master the principles of building scalable, reliable, and maintainable distributed systems.
+
+| Topic | Description | Guide |
+|-------|-------------|-------|
+| **Distributed Patterns** | Circuit Breakers, CQRS, Sagas | [Guide](./docs/system-design/distributed-systems-patterns.md) |
+| **Scalability** | Caching, Sharding, CAP Theorem | [Guide](./docs/system-design/scalability-guide.md) |
+| **Diagramming** | C4 Model, Mermaid.js | [Guide](./docs/system-design/diagramming-guide.md) |
+
+---
+
 ### 🏗️ Infrastructure & DevOps
 **Path**: [`docs/infrastructure-devops/`](./docs/infrastructure-devops/README.md)
 
@@ -69,7 +82,20 @@ Automate software delivery, infrastructure deployments, and business workflows.
 
 ---
 
-### 🐍 Python Automation
+### �️ Security & DevSecOps
+**Path**: [`docs/security/`](./docs/security/README.md)
+
+Integrate security into every stage of the software development lifecycle.
+
+| Topic | Description | Guide |
+|-------|-------------|-------|
+| **AppSec** | OWASP Top 10, Input Validation | [Guide](./docs/security/appsec-guide.md) |
+| **Secrets** | Safe handling of credentials | [Guide](./docs/security/secrets-management.md) |
+| **DevSecOps** | Security in CI/CD pipelines | [Guide](./docs/security/devsecops-guide.md) |
+
+---
+
+### �🐍 Python Automation
 **Path**: [`docs/python-automation/`](./docs/python-automation/README.md)
 
 Automate scripts, CLIs, scheduled jobs, and API integrations using Python.
