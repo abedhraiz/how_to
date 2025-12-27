@@ -173,7 +173,7 @@ main (always deployable)
 - 🔄 **[CI/CD Automation](../cicd-automation/README.md)** - Automate workflows with Git hooks
 - 🏗️ **[Infrastructure & DevOps](../infrastructure-devops/README.md)** - GitOps for infrastructure
 - 🔧 **[Data Engineering](../data-engineering/README.md)** - Version control for data pipelines
-- 📚 **[Project Meta](../project-meta/README.md)** - Contributing guidelines
+- 📚 **[Contributing](../../CONTRIBUTING.md)** - Contributing guidelines
 
 ## Quick Start Examples
 

@@ -8,7 +8,7 @@ Comprehensive guides for building data pipelines, streaming systems, ML operatio
 
 ### Workflow Orchestration
 - **[Apache Airflow](./workflow-orchestration/apache-airflow-guide.md)** - Workflow automation and scheduling platform
-- **[n8n](./workflow-orchestration/n8n-guide.md)** - Workflow automation tool (also see [CI/CD section](../cicd-automation/workflow-automation/n8n-guide.md))
+- **[n8n](../cicd-automation/workflow-automation/n8n-guide.md)** - Workflow automation tool (cross-listed from CI/CD)
 
 ### Streaming Data
 - **[Apache Kafka](./streaming/apache-kafka-guide.md)** - Distributed streaming platform for real-time data pipelines

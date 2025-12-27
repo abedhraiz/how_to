@@ -1251,4 +1251,4 @@ class ShadowModeComparison:
 
 ---
 
-*This guide covers ML testing. For deployment and monitoring, see [Model Serving Guide](model-serving-guide.md) and [ML Observability Guide](ml-observability-guide.md).*
+*This guide covers ML testing. For deployment and monitoring, see [Model Serving Guide](../ml-infrastructure/model-serving-guide.md) and [ML Observability Guide](../ml-infrastructure/ml-observability-guide.md).*

@@ -3,7 +3,7 @@
 > **Production-grade guides for Senior Engineers & AI Leaders - DevOps, Cloud, Data Engineering, LLM Operations, and AI Leadership.**
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](docs/project-meta/CONTRIBUTING.md)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Markdown Lint](https://github.com/abedhraiz/how_to/workflows/Markdown%20Lint/badge.svg)](https://github.com/abedhraiz/how_to/actions)
 [![Link Checker](https://github.com/abedhraiz/how_to/workflows/Link%20Checker/badge.svg)](https://github.com/abedhraiz/how_to/actions)
 
@@ -15,6 +15,9 @@
 
 ### Featured Guides:
 - 🚀 **[LLM Operations](docs/ai-ml-frameworks/llm-operations-guide.md)** - Production LLM deployment, RAG, prompt engineering, cost optimization
+- 🧪 **[LLM Evaluation](docs/ai-ml-frameworks/llm-evaluation-guide.md)** - Testing, regression harnesses, RAG evaluation, release gates
+- 🔐 **[AI Security & Privacy](docs/ai-ml-frameworks/ai-security-guide.md)** - Prompt injection defense, data controls, safe agent tooling
+- 🖼️ **[Multimodal AI](docs/ai-ml-frameworks/multimodal-ai-guide.md)** - Document AI and vision+text production patterns
 - 👔 **[AI Leadership](docs/ai-ml-frameworks/ai-leadership-guide.md)** - Team building, AI strategy, ROI calculation, governance
 - 🔗 **[LangChain Ecosystem](docs/ai-ml-frameworks/langchain/langchain-ecosystem-guide.md)** - Production patterns and best practices
 
@@ -96,7 +99,7 @@ Build data pipelines, streaming systems, and ML operations.
 
 **Workflow Orchestration**
 - **[Apache Airflow](docs/data-engineering/workflow-orchestration/apache-airflow-guide.md)** - Workflow Automation
-- **[n8n](docs/data-engineering/workflow-orchestration/n8n-guide.md)** - Low-Code Automation
+- **[n8n](docs/cicd-automation/workflow-automation/n8n-guide.md)** - Low-Code Automation
 
 **ML Infrastructure** ⭐ NEW
 - **[Vector Databases](docs/ml-infrastructure/vector-databases-guide.md)** - Production RAG & semantic search
@@ -128,6 +131,11 @@ Production LLM systems, AI leadership, and advanced ML operations.
 Automate software delivery and infrastructure deployments.
 
 - **[Jenkins](docs/cicd-automation/jenkins/jenkins-guide.md)** - CI/CD Automation Server
+
+### 🐍 [Python Automation](docs/python-automation/README.md)
+Automate scripts, CLIs, scheduled jobs, and integrations.
+
+- **[Python Automation Guide](docs/python-automation/python-automation-guide.md)** - Patterns for safe, maintainable automation
 
 ### 💼 [Business & Strategy](docs/business-strategy/README.md)
 Business metrics, product strategy, and project leadership.
@@ -162,10 +170,10 @@ Frameworks for building AI and machine learning applications.
 
 ### New to This Repository?
 
-1. **Start Here**: Read the [Getting Started Guide](docs/project-meta/GETTING_STARTED.md)
+1. **Start Here**: Read the [Getting Started Guide](GETTING_STARTED.md)
 2. **Browse by Category**: Choose a category above based on your interest
 3. **Follow a Learning Path**: Check [NAVIGATION.md](NAVIGATION.md) for structured learning paths
-4. **Try an Example**: Work through the [Example Project](docs/project-meta/EXAMPLE_PROJECT.md)
+4. **Try an Example**: Work through the [Example Project](EXAMPLE_PROJECT.md)
 
 ### Looking for Something Specific?
 
@@ -252,7 +260,7 @@ We welcome contributions! Here's how you can help:
 - 🐛 **Report Issues** - Found a problem? Let us know
 - 💡 **Suggest Topics** - What would you like to learn about?
 
-See [CONTRIBUTING.md](docs/project-meta/CONTRIBUTING.md) for detailed guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
@@ -299,7 +307,7 @@ repo:abedhraiz/how_to path:docs/data-engineering/ airflow
 
 ## 📅 What's New
 
-See [CHANGELOG.md](docs/project-meta/CHANGELOG.md) for version history and updates.
+See [CHANGELOG.md](CHANGELOG.md) for version history and updates.
 
 **Recent Additions:**
 - ✨ Complete AI/ML Lifecycle documentation (42 guides)
@@ -320,7 +328,7 @@ I created this comprehensive knowledge base to share practical, production-ready
 **Connect with me:**
 - 💼 [LinkedIn](https://www.linkedin.com/in/abed-elalim-hraiz-25bb90113/)
 - 🌟 If this repository helps you, please star it and share with your network!
-- 📖 [More about me](docs/project-meta/AUTHOR.md)
+- 📖 [More about me](AUTHOR.md)
 
 ---
 
@@ -335,7 +343,7 @@ Find this useful? Help others discover it! See [LINKEDIN_POST.md](LINKEDIN_POST.
 
 ## 🤝 Contributing
 
-We welcome contributions! See our [Contributing Guide](docs/project-meta/CONTRIBUTING.md) for details.
+We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for details.
 
 **Ways to contribute:**
 - 📝 Improve existing guides
@@ -372,9 +380,9 @@ This knowledge base is built with contributions from the community and inspired 
 
 ## 🗺️ Navigation
 
-**Quick Links**: [Navigation Guide](NAVIGATION.md) | [Getting Started](docs/project-meta/GETTING_STARTED.md) | [Contributing](docs/project-meta/CONTRIBUTING.md) | [Example Project](docs/project-meta/EXAMPLE_PROJECT.md)
+**Quick Links**: [Navigation Guide](NAVIGATION.md) | [Getting Started](GETTING_STARTED.md) | [Contributing](CONTRIBUTING.md) | [Example Project](EXAMPLE_PROJECT.md)
 
-**Categories**: [Infrastructure & DevOps](docs/infrastructure-devops/README.md) | [Cloud Platforms](docs/cloud-platforms/README.md) | [Data Engineering](docs/data-engineering/README.md) | [CI/CD](docs/cicd-automation/README.md) | [Monitoring](docs/monitoring-observability/README.md) | [Databases](docs/databases/README.md) | [Version Control](docs/version-control/README.md) | [AI/ML](docs/ai-ml-frameworks/README.md)
+**Categories**: [Infrastructure & DevOps](docs/infrastructure-devops/README.md) | [Cloud Platforms](docs/cloud-platforms/README.md) | [Data Engineering](docs/data-engineering/README.md) | [CI/CD](docs/cicd-automation/README.md) | [Python Automation](docs/python-automation/README.md) | [Monitoring](docs/monitoring-observability/README.md) | [Databases](docs/databases/README.md) | [Version Control](docs/version-control/README.md) | [AI/ML](docs/ai-ml-frameworks/README.md)
 
 ---
 

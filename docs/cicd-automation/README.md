@@ -11,7 +11,7 @@ Comprehensive guides for implementing Continuous Integration, Continuous Deploym
 - **[GitHub Actions](./github-actions/github-actions-guide.md)** - Native CI/CD automation integrated with GitHub
 
 ### Workflow Automation
-- **[n8n](./workflow-automation/n8n-guide.md)** - Workflow automation for technical workflows (also see [Data Engineering](../data-engineering/workflow-orchestration/n8n-guide.md) for data pipeline use)
+- **[n8n](./workflow-automation/n8n-guide.md)** - Workflow automation for technical workflows
 
 ## Prerequisites
 

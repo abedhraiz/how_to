@@ -49,7 +49,7 @@ Build data pipelines, streaming systems, and ML operations infrastructure.
 
 | Category | Technologies | Guides |
 |----------|-------------|--------|
-| **Workflow Orchestration** | Apache Airflow, n8n | [Airflow](./docs/data-engineering/workflow-orchestration/apache-airflow-guide.md), [n8n](./docs/data-engineering/workflow-orchestration/n8n-guide.md) |
+| **Workflow Orchestration** | Apache Airflow, n8n | [Airflow](./docs/data-engineering/workflow-orchestration/apache-airflow-guide.md), [n8n](./docs/cicd-automation/workflow-automation/n8n-guide.md) |
 | **Streaming** | Apache Kafka | [Kafka](./docs/data-engineering/streaming/apache-kafka-guide.md) |
 | **ML Operations** | W&B, Feature Engineering | [W&B](./docs/data-engineering/ml-ops/wandb-guide.md), [Features](./docs/data-engineering/ml-ops/feature-engineering-guide.md) |
 | **AI Lifecycle** | Complete ML project lifecycle | [Full Documentation](./docs/data-engineering/ai-lifecycle/README.md) |
@@ -66,6 +66,17 @@ Automate software delivery, infrastructure deployments, and business workflows.
 | **Jenkins** | CI/CD automation server | [Guide](./docs/cicd-automation/jenkins/jenkins-guide.md) |
 | **GitHub Actions** | Native GitHub CI/CD | [Guide](./docs/cicd-automation/github-actions/github-actions-guide.md) |
 | **n8n** | Workflow automation | [Guide](./docs/cicd-automation/workflow-automation/n8n-guide.md) |
+
+---
+
+### 🐍 Python Automation
+**Path**: [`docs/python-automation/`](./docs/python-automation/README.md)
+
+Automate scripts, CLIs, scheduled jobs, and API integrations using Python.
+
+| Guide | Description | Link |
+|------|-------------|------|
+| **Python Automation** | Patterns for safe, maintainable automation | [Guide](./docs/python-automation/python-automation-guide.md) |
 
 ---
 
@@ -109,21 +120,23 @@ Frameworks for building AI and machine learning applications.
 
 | Framework | Description | Guide |
 |-----------|-------------|-------|
+| **LLM Evaluation** | Testing, regression, and release gates | [Guide](./docs/ai-ml-frameworks/llm-evaluation-guide.md) |
+| **AI Security & Privacy** | Prompt injection defense and safe deployments | [Guide](./docs/ai-ml-frameworks/ai-security-guide.md) |
+| **Multimodal AI** | Document AI and vision+text production patterns | [Guide](./docs/ai-ml-frameworks/multimodal-ai-guide.md) |
 | **LangChain** | LLM application framework | [Guide](./docs/ai-ml-frameworks/langchain/langchain-ecosystem-guide.md) |
 
 ---
 
 ### 📄 Project Documentation
-**Path**: [`docs/project-meta/`](./docs/project-meta/README.md)
 
 Meta documentation, contribution guidelines, and project information.
 
 | Document | Description | Link |
 |----------|-------------|------|
-| **Getting Started** | Quick start guide | [Guide](./docs/project-meta/GETTING_STARTED.md) |
-| **Contributing** | Contribution guidelines | [Guide](./docs/project-meta/CONTRIBUTING.md) |
-| **Changelog** | Version history | [Changelog](./docs/project-meta/CHANGELOG.md) |
-| **Example Project** | Project walkthrough | [Example](./docs/project-meta/EXAMPLE_PROJECT.md) |
+| **Getting Started** | Quick start guide | [Guide](./GETTING_STARTED.md) |
+| **Contributing** | Contribution guidelines | [Guide](./CONTRIBUTING.md) |
+| **Changelog** | Version history | [Changelog](./CHANGELOG.md) |
+| **Example Project** | Project walkthrough | [Example](./EXAMPLE_PROJECT.md) |
 
 ---
 
@@ -230,8 +243,8 @@ Meta documentation, contribution guidelines, and project information.
 
 ### 🚀 Getting Started
 - [Main README](./README.md) - Project overview
-- [Getting Started Guide](./docs/project-meta/GETTING_STARTED.md) - First steps
-- [Example Project](./docs/project-meta/EXAMPLE_PROJECT.md) - End-to-end example
+- [Getting Started Guide](./GETTING_STARTED.md) - First steps
+- [Example Project](./EXAMPLE_PROJECT.md) - End-to-end example
 
 ### 📖 Most Popular Guides
 1. [Docker Guide](./docs/infrastructure-devops/docker/docker-guide.md)
@@ -342,13 +355,13 @@ Home > AI/ML Frameworks > LangChain
 Found a broken link or want to improve navigation?
 
 1. **Report Issues**: [GitHub Issues](https://github.com/abedhraiz/how_to/issues)
-2. **Submit PR**: Follow [Contributing Guidelines](./docs/project-meta/CONTRIBUTING.md)
+2. **Submit PR**: Follow [Contributing Guidelines](./CONTRIBUTING.md)
 3. **Suggest Improvements**: Open a discussion
 
 ---
 
 ## Navigation Footer
 
-**Categories**: [Infrastructure & DevOps](./docs/infrastructure-devops/README.md) | [Cloud Platforms](./docs/cloud-platforms/README.md) | [Data Engineering](./docs/data-engineering/README.md) | [CI/CD](./docs/cicd-automation/README.md) | [Monitoring](./docs/monitoring-observability/README.md) | [Databases](./docs/databases/README.md) | [Version Control](./docs/version-control/README.md) | [AI/ML](./docs/ai-ml-frameworks/README.md)
+**Categories**: [Infrastructure & DevOps](./docs/infrastructure-devops/README.md) | [Cloud Platforms](./docs/cloud-platforms/README.md) | [Data Engineering](./docs/data-engineering/README.md) | [CI/CD](./docs/cicd-automation/README.md) | [Python Automation](./docs/python-automation/README.md) | [Monitoring](./docs/monitoring-observability/README.md) | [Databases](./docs/databases/README.md) | [Version Control](./docs/version-control/README.md) | [AI/ML](./docs/ai-ml-frameworks/README.md)
 
-**Meta**: [Home](./README.md) | [Getting Started](./docs/project-meta/GETTING_STARTED.md) | [Contributing](./docs/project-meta/CONTRIBUTING.md) | [Changelog](./docs/project-meta/CHANGELOG.md)
+**Meta**: [Home](./README.md) | [Getting Started](./GETTING_STARTED.md) | [Contributing](./CONTRIBUTING.md) | [Changelog](./CHANGELOG.md)

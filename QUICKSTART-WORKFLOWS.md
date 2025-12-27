@@ -370,7 +370,7 @@ Want to add a new workflow?
 3. Create a pull request
 4. Update this guide with your new workflow
 
-See [CONTRIBUTING.md](docs/project-meta/CONTRIBUTING.md) for details.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ---
 

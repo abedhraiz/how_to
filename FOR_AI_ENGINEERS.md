@@ -28,6 +28,9 @@ model = await router.route_request(
 - ✅ Complete RAG system with hybrid search
 - ✅ Agentic workflows with tool integration
 - ✅ Advanced prompt engineering patterns (CoT, ReAct, Self-Consistency)
+- ✅ LLM evaluation harness patterns (golden datasets, regression tests)
+- ✅ AI security patterns (prompt injection defense, safe tool execution)
+- ✅ Multimodal/document AI production architecture
 - ✅ Cost optimization reducing API costs 80%+
 - ✅ Production monitoring and observability
 

@@ -37,16 +37,16 @@ A production-ready **movie recommendation system** that:
 
 | Component | Tool | Guide Reference |
 |-----------|------|-----------------|
-| Version Control | Git | [Git Guide](git-guide.md) |
-| Containerization | Docker | [Docker Guide](docker-guide.md) |
-| Orchestration | Kubernetes | [Kubernetes Guide](kubernetes-guide.md) |
-| Streaming | Kafka | [Kafka Guide](apache-kafka-guide.md) |
-| Workflow | Airflow | [Airflow Guide](apache-airflow-guide.md) |
-| Big Data | Databricks | [Databricks Guide](databricks-guide.md) |
-| Database | PostgreSQL | [PostgreSQL Guide](postgresql-guide.md) |
-| ML Tracking | W&B | [W&B Guide](wandb-guide.md) |
-| Monitoring | Prometheus + Grafana | [Prometheus Guide](prometheus-grafana-guide.md) |
-| CI/CD | GitHub Actions | [GitHub Actions Guide](github-actions-guide.md) |
+| Version Control | Git | [Git Guide](docs/version-control/git/git-guide.md) |
+| Containerization | Docker | [Docker Guide](docs/infrastructure-devops/docker/docker-guide.md) |
+| Orchestration | Kubernetes | [Kubernetes Guide](docs/infrastructure-devops/kubernetes/kubernetes-guide.md) |
+| Streaming | Kafka | [Kafka Guide](docs/data-engineering/streaming/apache-kafka-guide.md) |
+| Workflow | Airflow | [Airflow Guide](docs/data-engineering/workflow-orchestration/apache-airflow-guide.md) |
+| Big Data | Databricks | [Databricks Guide](docs/cloud-platforms/databricks/databricks-guide.md) |
+| Database | PostgreSQL | [PostgreSQL Guide](docs/databases/postgresql/postgresql-guide.md) |
+| ML Tracking | W&B | [W&B Guide](docs/data-engineering/ml-ops/wandb-guide.md) |
+| Monitoring | Prometheus + Grafana | [Prometheus Guide](docs/monitoring-observability/prometheus-grafana/prometheus-grafana-guide.md) |
+| CI/CD | GitHub Actions | [GitHub Actions Guide](docs/cicd-automation/github-actions/github-actions-guide.md) |
 
 ### Learning Outcomes
 
@@ -133,9 +133,9 @@ After completing this project, you'll know how to:
 - Basic SQL
 - Command line proficiency
 - Completed at least the following guides:
-  - [Docker Guide](docker-guide.md)
-  - [Kubernetes Guide](kubernetes-guide.md)
-  - [Git Guide](git-guide.md)
+  - [Docker Guide](docs/infrastructure-devops/docker/docker-guide.md)
+  - [Kubernetes Guide](docs/infrastructure-devops/kubernetes/kubernetes-guide.md)
+  - [Git Guide](docs/version-control/git/git-guide.md)
 
 ### Software Required
 
@@ -1345,16 +1345,16 @@ jobs:
 
 ## 📚 Related Guides
 
-- [Docker Guide](docker-guide.md) - Containerization
-- [Kubernetes Guide](kubernetes-guide.md) - Orchestration
-- [Apache Kafka Guide](apache-kafka-guide.md) - Streaming
-- [Apache Airflow Guide](apache-airflow-guide.md) - Orchestration
-- [Databricks Guide](databricks-guide.md) - Big data
-- [PostgreSQL Guide](postgresql-guide.md) - Database
-- [Weights & Biases Guide](wandb-guide.md) - ML tracking
-- [Feature Engineering Guide](feature-engineering-guide.md) - Features
-- [Prometheus & Grafana Guide](prometheus-grafana-guide.md) - Monitoring
-- [GitHub Actions Guide](github-actions-guide.md) - CI/CD
+- [Docker Guide](docs/infrastructure-devops/docker/docker-guide.md) - Containerization
+- [Kubernetes Guide](docs/infrastructure-devops/kubernetes/kubernetes-guide.md) - Orchestration
+- [Apache Kafka Guide](docs/data-engineering/streaming/apache-kafka-guide.md) - Streaming
+- [Apache Airflow Guide](docs/data-engineering/workflow-orchestration/apache-airflow-guide.md) - Orchestration
+- [Databricks Guide](docs/cloud-platforms/databricks/databricks-guide.md) - Big data
+- [PostgreSQL Guide](docs/databases/postgresql/postgresql-guide.md) - Database
+- [Weights & Biases Guide](docs/data-engineering/ml-ops/wandb-guide.md) - ML tracking
+- [Feature Engineering Guide](docs/data-engineering/ml-ops/feature-engineering-guide.md) - Features
+- [Prometheus & Grafana Guide](docs/monitoring-observability/prometheus-grafana/prometheus-grafana-guide.md) - Monitoring
+- [GitHub Actions Guide](docs/cicd-automation/github-actions/github-actions-guide.md) - CI/CD
 
 ---
 

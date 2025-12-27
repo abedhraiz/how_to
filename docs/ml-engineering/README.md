@@ -6,16 +6,12 @@ Production machine learning engineering patterns, testing, and code quality stan
 
 ### Engineering Excellence
 - **ML Testing** - Testing strategies for ML systems
-- **Python Best Practices** - Code quality and project structure
-- **Distributed Training** - Scaling model training
-- **Notebooks to Production** - Productionizing research code
+
 
 ## Guides
 
 - **[ML Testing Guide](ml-testing-guide.md)** - Comprehensive testing for ML systems ⭐
-- **[Python Best Practices](python-best-practices.md)** - ML project structure and standards
-- **[Distributed Training](distributed-training-guide.md)** - Multi-GPU and multi-node training
-- **[Notebooks to Production](notebooks-to-production.md)** - From Jupyter to production code
+
 
 ## Who Should Read This
 

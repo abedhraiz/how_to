@@ -10,6 +10,9 @@ This section covers **production-grade AI/ML systems**, from LLM operations to t
 
 ### 🚀 Production AI/ML Systems
 - **[LLM Operations Guide](llm-operations-guide.md)** - Production LLM deployment, RAG systems, prompt engineering, fine-tuning, cost optimization ⭐ **NEW**
+- **[LLM Evaluation & Testing Guide](llm-evaluation-guide.md)** - Golden datasets, regression testing, RAG eval, agent/tool eval ⭐ **NEW**
+- **[AI Security & Privacy Guide](ai-security-guide.md)** - Prompt injection defense, RAG exfiltration controls, tool safety ⭐ **NEW**
+- **[Multimodal AI Guide](multimodal-ai-guide.md)** - Document AI and vision+text production patterns ⭐ **NEW**
 - **[LangChain Ecosystem Guide](langchain/langchain-ecosystem-guide.md)** - LangChain components, patterns, and production use cases
 
 ### 👔 AI Leadership & Strategy  
@@ -457,4 +460,4 @@ evaluator = load_evaluator("labeled_criteria", criteria={
 ## Navigation
 
 - [← Back to Main Documentation](../../README.md)
-- [→ Next: Project Documentation](../project-meta/README.md)
+- [→ Next: Contributing](../../CONTRIBUTING.md)

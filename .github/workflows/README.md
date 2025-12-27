@@ -137,7 +137,7 @@ Add these markers to your markdown:
 ## 📊 Workflow Status
 
 Check the current status of all workflows:
-- [View Actions Tab](../../actions)
+- [View Actions Tab](https://github.com/abedhraiz/how_to/actions)
 
 ### Status Badges
 

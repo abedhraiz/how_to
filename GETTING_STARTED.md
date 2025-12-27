@@ -13,9 +13,9 @@ This guide helps you navigate the 20 comprehensive guides in this repository and
 **Your Background**: Limited programming experience, new to DevOps/ML
 
 **Start Here**:
-1. **Week 1**: [Git Guide](git-guide.md) - Learn version control
-2. **Week 2**: [Docker Guide](docker-guide.md) - Basic containerization
-3. **Week 3**: [PostgreSQL Guide](postgresql-guide.md) - Database fundamentals
+1. **Week 1**: [Git Guide](docs/version-control/git/git-guide.md) - Learn version control
+2. **Week 2**: [Docker Guide](docs/infrastructure-devops/docker/docker-guide.md) - Basic containerization
+3. **Week 3**: [PostgreSQL Guide](docs/databases/postgresql/postgresql-guide.md) - Database fundamentals
 
 **First Project**: Create a simple web app, containerize it, and version control it
 
@@ -26,10 +26,10 @@ This guide helps you navigate the 20 comprehensive guides in this repository and
 **Your Background**: Python, ML algorithms, Jupyter notebooks
 
 **Start Here**:
-1. **Week 1**: [Docker Guide](docker-guide.md) - Move from notebooks to containers
-2. **Week 2**: [Weights & Biases Guide](wandb-guide.md) - Track your experiments
-3. **Week 3**: [Feature Engineering Guide](feature-engineering-guide.md) - Improve your features
-4. **Week 4**: [Kubernetes Guide](kubernetes-guide.md) - Deploy models
+1. **Week 1**: [Docker Guide](docs/infrastructure-devops/docker/docker-guide.md) - Move from notebooks to containers
+2. **Week 2**: [Weights & Biases Guide](docs/data-engineering/ml-ops/wandb-guide.md) - Track your experiments
+3. **Week 3**: [Feature Engineering Guide](docs/data-engineering/ml-ops/feature-engineering-guide.md) - Improve your features
+4. **Week 4**: [Kubernetes Guide](docs/infrastructure-devops/kubernetes/kubernetes-guide.md) - Deploy models
 
 **First Project**: Deploy a trained model as a REST API in Kubernetes
 
@@ -40,10 +40,10 @@ This guide helps you navigate the 20 comprehensive guides in this repository and
 **Your Background**: Backend development, APIs, maybe some AWS
 
 **Start Here**:
-1. **Week 1**: [Kubernetes Guide](kubernetes-guide.md) - Scale your apps
-2. **Week 2**: [Terraform Guide](terraform-guide.md) - Automate infrastructure
-3. **Week 3**: [GitHub Actions Guide](github-actions-guide.md) - CI/CD pipelines
-4. **Week 4**: [Prometheus & Grafana Guide](prometheus-grafana-guide.md) - Monitor everything
+1. **Week 1**: [Kubernetes Guide](docs/infrastructure-devops/kubernetes/kubernetes-guide.md) - Scale your apps
+2. **Week 2**: [Terraform Guide](docs/infrastructure-devops/terraform/terraform-guide.md) - Automate infrastructure
+3. **Week 3**: [GitHub Actions Guide](docs/cicd-automation/github-actions/github-actions-guide.md) - CI/CD pipelines
+4. **Week 4**: [Prometheus & Grafana Guide](docs/monitoring-observability/prometheus-grafana/prometheus-grafana-guide.md) - Monitor everything
 
 **First Project**: Build auto-scaling infrastructure for a microservices app
 
@@ -54,10 +54,10 @@ This guide helps you navigate the 20 comprehensive guides in this repository and
 **Your Background**: ETL, databases, maybe Spark or SQL
 
 **Start Here**:
-1. **Week 1**: [Apache Kafka Guide](apache-kafka-guide.md) - Stream processing
-2. **Week 2**: [Apache Airflow Guide](apache-airflow-guide.md) - Orchestration
-3. **Week 3**: [Databricks Guide](databricks-guide.md) - Big data at scale
-4. **Week 4**: [Snowflake Guide](snowflake-guide.md) - Cloud warehouse
+1. **Week 1**: [Apache Kafka Guide](docs/data-engineering/streaming/apache-kafka-guide.md) - Stream processing
+2. **Week 2**: [Apache Airflow Guide](docs/data-engineering/workflow-orchestration/apache-airflow-guide.md) - Orchestration
+3. **Week 3**: [Databricks Guide](docs/cloud-platforms/databricks/databricks-guide.md) - Big data at scale
+4. **Week 4**: [Snowflake Guide](docs/cloud-platforms/snowflake/snowflake-guide.md) - Cloud warehouse
 
 **First Project**: Build a real-time + batch data pipeline
 
@@ -68,10 +68,10 @@ This guide helps you navigate the 20 comprehensive guides in this repository and
 **Your Background**: CI/CD, infrastructure, maybe cloud
 
 **Start Here**:
-1. **Week 1**: [Kubernetes + Docker Production Guide](kubernetes-docker-production-guide.md) - Production patterns
-2. **Week 2**: [Terraform Guide](terraform-guide.md) + [Ansible Guide](ansible-guide.md) - IaC
-3. **Week 3**: [Prometheus & Grafana Guide](prometheus-grafana-guide.md) - Advanced monitoring
-4. **Week 4**: Choose: [Databricks](databricks-guide.md) or [LangChain](langchain-ecosystem-guide.md) - Add ML/AI
+1. **Week 1**: [Kubernetes + Docker Production Guide](docs/infrastructure-devops/kubernetes/kubernetes-docker-production-guide.md) - Production patterns
+2. **Week 2**: [Terraform Guide](docs/infrastructure-devops/terraform/terraform-guide.md) + [Ansible Guide](docs/infrastructure-devops/ansible/ansible-guide.md) - IaC
+3. **Week 3**: [Prometheus & Grafana Guide](docs/monitoring-observability/prometheus-grafana/prometheus-grafana-guide.md) - Advanced monitoring
+4. **Week 4**: Choose: [Databricks](docs/cloud-platforms/databricks/databricks-guide.md) or [LangChain](docs/ai-ml-frameworks/langchain/langchain-ecosystem-guide.md) - Add ML/AI
 
 **First Project**: Build ML platform with auto-scaling, monitoring, and CI/CD
 
@@ -215,7 +215,7 @@ Week 7-8: Monitoring & Project
 
 ### Week 1: Container & Version Control
 
-**Monday-Tuesday**: [Git Guide](git-guide.md)
+**Monday-Tuesday**: [Git Guide](docs/version-control/git/git-guide.md)
 ```bash
 # Day 1 Tasks (2 hours)
 - Read "What is Git?" section
@@ -233,7 +233,7 @@ Week 7-8: Monitoring & Project
 Create a simple Python script, version control it, create feature branch, merge
 ```
 
-**Wednesday-Friday**: [Docker Guide](docker-guide.md)
+**Wednesday-Friday**: [Docker Guide](docs/infrastructure-devops/docker/docker-guide.md)
 ```bash
 # Day 3 Tasks (2 hours)
 - Read "What is Docker?" section
@@ -265,7 +265,7 @@ Containerize a Python Flask app with PostgreSQL database
 
 ### Week 2: Orchestration Basics
 
-**Monday-Wednesday**: [Kubernetes Guide](kubernetes-guide.md)
+**Monday-Wednesday**: [Kubernetes Guide](docs/infrastructure-devops/kubernetes/kubernetes-guide.md)
 ```bash
 # Day 8 Tasks (2 hours)
 - Read "What is Kubernetes?" section
@@ -288,7 +288,7 @@ Containerize a Python Flask app with PostgreSQL database
 Deploy your Week 1 app to Kubernetes
 ```
 
-**Thursday-Friday**: [PostgreSQL Guide](postgresql-guide.md) or [AWS Guide](aws-guide.md)
+**Thursday-Friday**: [PostgreSQL Guide](docs/databases/postgresql/postgresql-guide.md) or [AWS Guide](docs/cloud-platforms/aws/aws-guide.md)
 
 Choose based on your interest:
 - **Data-focused**: PostgreSQL
@@ -306,19 +306,19 @@ Choose based on your interest:
 **Choose your path based on interest:**
 
 **Path A: Data Engineering**
-- Monday-Wednesday: [Apache Kafka Guide](apache-kafka-guide.md)
-- Thursday-Friday: [Apache Airflow Guide](apache-airflow-guide.md)
+- Monday-Wednesday: [Apache Kafka Guide](docs/data-engineering/streaming/apache-kafka-guide.md)
+- Thursday-Friday: [Apache Airflow Guide](docs/data-engineering/workflow-orchestration/apache-airflow-guide.md)
 
 **Path B: ML Engineering**
-- Monday-Wednesday: [Feature Engineering Guide](feature-engineering-guide.md)
-- Thursday-Friday: [Weights & Biases Guide](wandb-guide.md)
+- Monday-Wednesday: [Feature Engineering Guide](docs/data-engineering/ml-ops/feature-engineering-guide.md)
+- Thursday-Friday: [Weights & Biases Guide](docs/data-engineering/ml-ops/wandb-guide.md)
 
 **Path C: DevOps**
-- Monday-Wednesday: [Terraform Guide](terraform-guide.md)
-- Thursday-Friday: [GitHub Actions Guide](github-actions-guide.md)
+- Monday-Wednesday: [Terraform Guide](docs/infrastructure-devops/terraform/terraform-guide.md)
+- Thursday-Friday: [GitHub Actions Guide](docs/cicd-automation/github-actions/github-actions-guide.md)
 
 **Path D: AI Applications**
-- Monday-Friday: [LangChain Ecosystem Guide](langchain-ecosystem-guide.md)
+- Monday-Friday: [LangChain Ecosystem Guide](docs/ai-ml-frameworks/langchain/langchain-ecosystem-guide.md)
 
 **Weekend**: Build something that integrates Week 1, 2, and 3 learnings
 
@@ -326,7 +326,7 @@ Choose based on your interest:
 
 ### Week 4: Production & Monitoring
 
-**Monday-Wednesday**: [Kubernetes + Docker Production Guide](kubernetes-docker-production-guide.md)
+**Monday-Wednesday**: [Kubernetes + Docker Production Guide](docs/infrastructure-devops/kubernetes/kubernetes-docker-production-guide.md)
 ```bash
 # Production-ready patterns
 - Multi-stage builds optimization
@@ -338,7 +338,7 @@ Choose based on your interest:
 Make your Week 3 project production-ready
 ```
 
-**Thursday-Friday**: [Prometheus & Grafana Guide](prometheus-grafana-guide.md)
+**Thursday-Friday**: [Prometheus & Grafana Guide](docs/monitoring-observability/prometheus-grafana/prometheus-grafana-guide.md)
 ```bash
 # Monitoring and observability
 - Set up Prometheus

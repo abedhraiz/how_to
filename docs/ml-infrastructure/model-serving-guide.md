@@ -1268,4 +1268,4 @@ async def predict(input_data):
 
 ---
 
-*This guide covers model serving. For ML lifecycle management, see [MLOps guides](../data-engineering/ml-ops/).*
+*This guide covers model serving. For ML lifecycle management, see the [Data Engineering section](../data-engineering/README.md).* 

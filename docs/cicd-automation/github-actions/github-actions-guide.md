@@ -1029,10 +1029,10 @@ on:
 
 ## Related Resources
 
-- [Jenkins Guide](../../jenkins/jenkins-guide.md)
+- [Jenkins Guide](../jenkins/jenkins-guide.md)
 - [CI/CD Automation Overview](../README.md)
-- [Docker Guide](../../../infrastructure-devops/docker/docker-guide.md)
-- [Kubernetes Guide](../../../infrastructure-devops/kubernetes/kubernetes-guide.md)
+- [Docker Guide](../../infrastructure-devops/docker/docker-guide.md)
+- [Kubernetes Guide](../../infrastructure-devops/kubernetes/kubernetes-guide.md)
 
 ---
 

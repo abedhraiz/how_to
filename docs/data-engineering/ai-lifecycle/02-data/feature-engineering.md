@@ -363,7 +363,7 @@ feature_registry = {
 ## Related Documents
 
 - [Data Preprocessing](./data-preprocessing.md) - Data cleaning
-- [Feature Engineering Guide](../../feature-engineering-guide.md) - Detailed techniques
+- [Feature Engineering Guide](../../ml-ops/feature-engineering-guide.md) - Detailed techniques
 - [Model Selection](../03-modeling/model-selection.md) - Choosing models for features
 
 ---

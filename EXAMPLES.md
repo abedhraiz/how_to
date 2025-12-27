@@ -608,6 +608,20 @@ This document provides a curated index of all practical, real-world examples ava
 
 ---
 
+### Python Automation
+
+**Location**: [docs/python-automation/python-automation-guide.md](docs/python-automation/python-automation-guide.md)
+
+#### Featured Examples
+
+1. **CLI Script Pattern** - Safe argparse entrypoint ([CLI Basics](docs/python-automation/python-automation-guide.md#cli-basics-argparse))
+2. **Logging Setup** - Production-friendly logs ([Logging](docs/python-automation/python-automation-guide.md#logging))
+3. **HTTP Automation** - REST calls + retry guidance ([HTTP Automation](docs/python-automation/python-automation-guide.md#http-automation-requests-retries))
+4. **Shell Command Runner** - Safer subprocess usage ([Running Shell Commands](docs/python-automation/python-automation-guide.md#running-shell-commands-safely))
+5. **Scheduling** - cron patterns for unattended jobs ([Scheduling](docs/python-automation/python-automation-guide.md#scheduling-cron))
+
+---
+
 ## AI/ML Operations
 
 ### LangChain
@@ -772,7 +786,7 @@ All examples include:
 
 ## Contributing Examples
 
-Want to add more examples? See [CONTRIBUTING.md](docs/project-meta/CONTRIBUTING.md)
+Want to add more examples? See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ### What Makes a Good Example
 
@@ -803,7 +817,11 @@ Want to add more examples? See [CONTRIBUTING.md](docs/project-meta/CONTRIBUTING.
 - **Monitoring**: Prometheus/Grafana, Alerting
 - **Data Engineering**: Airflow ETL, Kafka Streaming
 - **ML/AI**: W&B Tracking, LangChain RAG
+- **LLM Evaluation**: Regression Tests, RAG Quality
+- **AI Security**: Prompt Injection Defense, Safe Tooling
+- **Multimodal AI**: Document Extraction, Visual Q&A
 - **Version Control**: Git Workflows, Advanced Rebasing
+- **Python Automation**: Scripts, CLIs, Scheduled Jobs
 - **Business Strategy**: ROI Analysis, OKR Examples, Product-Market Fit
 
 ---
