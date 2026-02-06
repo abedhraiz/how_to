@@ -9,12 +9,14 @@ Looking for help with the DevOps & Data Engineering Knowledge Base? Here's how t
 Before asking for help, try these resources:
 
 ### 1. Documentation
+
 - **[Getting Started Guide](GETTING_STARTED.md)** - New to the repo? Start here
 - **[Navigation Guide](NAVIGATION.md)** - Find specific content
 - **[FAQ](FAQ.md)** - Common questions answered
 - **[Examples](EXAMPLES.md)** - Working code examples
 
 ### 2. Search the Repository
+
 ```bash
 # Search all documentation
 grep -r "your-search-term" docs/
@@ -24,6 +26,7 @@ find docs/ -name "*kubernetes*.md"
 ```
 
 ### 3. Check Existing Issues
+
 - [Open Issues](https://github.com/abedhraiz/how_to/issues)
 - [Closed Issues](https://github.com/abedhraiz/how_to/issues?q=is%3Aissue+is%3Aclosed)
 
@@ -34,11 +37,13 @@ find docs/ -name "*kubernetes*.md"
 ### For Questions About Content
 
 **Use GitHub Discussions:**
+
 - [Ask Questions](https://github.com/abedhraiz/how_to/discussions/categories/q-a)
 - [Share Ideas](https://github.com/abedhraiz/how_to/discussions/categories/ideas)
 - [Show & Tell](https://github.com/abedhraiz/how_to/discussions/categories/show-and-tell)
 
 **Good question examples:**
+
 - "How do I implement X pattern from the Kubernetes guide?"
 - "What's the difference between approach A and B in the Terraform guide?"
 - "Can someone explain section X in the Docker guide?"
@@ -46,10 +51,12 @@ find docs/ -name "*kubernetes*.md"
 ### For Problems with Documentation
 
 **Open an Issue:**
+
 - [Bug Report](https://github.com/abedhraiz/how_to/issues/new?template=bug_report.md) - Something's broken or wrong
 - [Documentation Issue](https://github.com/abedhraiz/how_to/issues/new?template=documentation.md) - Content needs improvement
 
 **Include:**
+
 - Specific file and section
 - What's wrong or unclear
 - What you expected
@@ -58,9 +65,11 @@ find docs/ -name "*kubernetes*.md"
 ### For Feature Requests
 
 **Open a Feature Request:**
+
 - [Feature Request](https://github.com/abedhraiz/how_to/issues/new?template=feature_request.md) - Suggest new guides or enhancements
 
 **Include:**
+
 - Technology/topic you want covered
 - Why it's valuable
 - Who would benefit
@@ -71,14 +80,18 @@ find docs/ -name "*kubernetes*.md"
 ## 🤝 Community Support
 
 ### GitHub Discussions
+
 The best place for community interaction:
+
 - Ask and answer questions
 - Share your experiences
 - Discuss best practices
 - Show what you've built
 
 ### Response Times
+
 This is a community-driven project:
+
 - **Simple questions**: Usually answered within 1-2 days
 - **Complex issues**: May take 3-5 days
 - **Feature requests**: Reviewed on a regular basis
@@ -88,15 +101,18 @@ This is a community-driven project:
 ## 📧 Direct Contact
 
 ### When to Contact Directly
+
 - **Security vulnerabilities** - See [SECURITY.md](SECURITY.md)
 - **Private concerns** - Use LinkedIn
 - **Collaboration opportunities**
 
 ### Contact Methods
+
 - **LinkedIn**: [Abed Elalim Hraiz](https://www.linkedin.com/in/abed-elalim-hraiz-25bb90113/)
 - **Public Issues**: [GitHub Issues](https://github.com/abedhraiz/how_to/issues)
 
 **Please do not email for:**
+
 - General questions (use Discussions)
 - Feature requests (use Issues)
 - Documentation bugs (use Issues)
@@ -105,7 +121,8 @@ This is a community-driven project:
 
 ## 🎯 What We Can Help With
 
-### ✅ We Can Help With:
+### ✅ We Can Help With
+
 - Understanding documentation content
 - Fixing errors in guides
 - Clarifying examples
@@ -113,7 +130,8 @@ This is a community-driven project:
 - Contributing guidelines
 - Best practices questions
 
-### ❌ We Cannot Help With:
+### ❌ We Cannot Help With
+
 - Debugging your specific project
 - Custom implementation support
 - Tool-specific support (contact tool maintainers)
@@ -125,6 +143,7 @@ This is a community-driven project:
 ## 🌟 Contributing Back
 
 Found a solution? Help others!
+
 - Answer questions in Discussions
 - Improve documentation that confused you
 - Add examples that helped you
@@ -137,7 +156,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute.
 ## 🚀 Quick Links
 
 | Need | Link |
-|------|------|
+| ---- | ---- |
 | Report a bug | [Bug Report Template](https://github.com/abedhraiz/how_to/issues/new?template=bug_report.md) |
 | Request a feature | [Feature Request Template](https://github.com/abedhraiz/how_to/issues/new?template=feature_request.md) |
 | Improve docs | [Documentation Issue Template](https://github.com/abedhraiz/how_to/issues/new?template=documentation.md) |
@@ -150,7 +169,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute.
 ## 📖 Related Resources
 
 ### Official Documentation
+
 For tool-specific questions, check official docs:
+
 - [Docker Docs](https://docs.docker.com/)
 - [Kubernetes Docs](https://kubernetes.io/docs/)
 - [Terraform Docs](https://www.terraform.io/docs/)
@@ -158,6 +179,7 @@ For tool-specific questions, check official docs:
 - And more...
 
 ### Community Resources
+
 - Stack Overflow (for technical questions)
 - Reddit communities (r/devops, r/kubernetes, etc.)
 - Discord servers (tool-specific)
@@ -167,9 +189,12 @@ For tool-specific questions, check official docs:
 **Thank you for being part of our community!**
 
 If you find this repository helpful, please:
+
 - ⭐ Star the repository
 - 🔄 Share with colleagues
 - 💬 Join discussions
 - 🤝 Contribute improvements
 
-*Last updated: February 2026*
+## Last Updated
+
+February 2026

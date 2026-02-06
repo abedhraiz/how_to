@@ -4,8 +4,12 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg)](CODE_OF_CONDUCT.md)
 [![Markdown Lint](https://github.com/abedhraiz/how_to/workflows/Markdown%20Lint/badge.svg)](https://github.com/abedhraiz/how_to/actions)
 [![Link Checker](https://github.com/abedhraiz/how_to/workflows/Link%20Checker/badge.svg)](https://github.com/abedhraiz/how_to/actions)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+📖 **[Getting Started](GETTING_STARTED.md)** • 🗺️ **[Navigation](NAVIGATION.md)** • ❓ **[FAQ](FAQ.md)** • 💬 **[Support](SUPPORT.md)** • 🗓️ **[Roadmap](ROADMAP.md)** • 🔒 **[Security](SECURITY.md)**
 
 ---
 
@@ -273,6 +277,13 @@ We welcome contributions! Here's how you can help:
 - ➕ **Add New Guides** - Share your expertise on new technologies
 - 🐛 **Report Issues** - Found a problem? Let us know
 - 💡 **Suggest Topics** - What would you like to learn about?
+- ❓ **Answer Questions** - Help others in [Discussions](https://github.com/abedhraiz/how_to/discussions)
+
+**Getting Started:**
+- Read our [Contributing Guide](CONTRIBUTING.md) for detailed guidelines
+- Use our [Issue Templates](.github/ISSUE_TEMPLATE) for bug reports and feature requests
+- Follow our [Code of Conduct](CODE_OF_CONDUCT.md)
+- Check the [Roadmap](ROADMAP.md) for planned improvements
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
@@ -321,9 +332,10 @@ repo:abedhraiz/how_to path:docs/data-engineering/ airflow
 
 ## 📅 What's New
 
-See [CHANGELOG.md](CHANGELOG.md) for version history and updates.
+See [CHANGELOG.md](CHANGELOG.md) for version history and updates. Check [ROADMAP.md](ROADMAP.md) for future plans.
 
 **Recent Additions:**
+- ✨ Enhanced community files (Code of Conduct, Security Policy, FAQ)
 - ✨ Complete AI/ML Lifecycle documentation (42 guides)
 - ✨ Reorganized into hierarchical category structure
 - ✨ Comprehensive navigation system
@@ -351,28 +363,19 @@ I created this comprehensive knowledge base to share practical, production-ready
 Find this useful? Help others discover it! See [LINKEDIN_POST.md](LINKEDIN_POST.md) for ready-to-use LinkedIn and social media templates.
 
 **Quick share for LinkedIn:**
-> 🚀 Sharing a comprehensive DevOps & Data Engineering knowledge base with 70+ production-ready guides covering Infrastructure, Cloud, Data Engineering, CI/CD, and AI/ML! Check it out: https://github.com/abedhraiz/how_to
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for details.
-
-**Ways to contribute:**
-- 📝 Improve existing guides
-- ✨ Add new technology guides
-- 🐛 Fix errors or outdated information
-- 💡 Suggest new topics
-- 🔗 Add helpful resources
+> 🚀 Sharing a comprehensive DevOps & Data Engineering knowledge base with 70+ production-ready guides covering Infrastructure, Cloud, Data Engineering, CI/CD, and AI/ML! Check it out: <https://github.com/abedhraiz/how_to>
 
 ---
 
 ## 📬 Support & Community
 
-- **Issues**: [Report bugs or request features](https://github.com/abedhraiz/how_to/issues)
-- **Discussions**: [Ask questions and share ideas](https://github.com/abedhraiz/how_to/discussions)
-- **Pull Requests**: [Contribute improvements](https://github.com/abedhraiz/how_to/pulls)
+Need help or want to connect?
+
+- ❓ **Questions**: [GitHub Discussions](https://github.com/abedhraiz/how_to/discussions) - Ask questions and get help
+- 🐛 **Issues**: [Report bugs or request features](https://github.com/abedhraiz/how_to/issues)
+- 💬 **Support**: See [SUPPORT.md](SUPPORT.md) for detailed help options
+- 📖 **FAQ**: Check [FAQ.md](FAQ.md) for common questions
+- 🔒 **Security**: Report vulnerabilities via [SECURITY.md](SECURITY.md)
 
 ---
 

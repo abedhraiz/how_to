@@ -21,6 +21,7 @@ A comprehensive knowledge base covering DevOps, Data Engineering, and AI/ML topi
 ### Is this free to use?
 
 Yes! This repository is licensed under MIT License. You can:
+
 - ✅ Read and learn from all content
 - ✅ Use examples in your projects
 - ✅ Share with your team
@@ -29,6 +30,7 @@ Yes! This repository is licensed under MIT License. You can:
 ### How is this different from official docs?
 
 This repository:
+
 - **Curates** best practices from multiple sources
 - **Provides** real-world examples and patterns
 - **Connects** related technologies
@@ -53,6 +55,7 @@ See [GETTING_STARTED.md](GETTING_STARTED.md) for role-specific paths.
 ### What if I'm a complete beginner?
 
 Start with these three guides in order:
+
 1. [Git Guide](docs/version-control/git/git-guide.md) - Version control basics
 2. [Docker Guide](docs/infrastructure-devops/docker/docker-guide.md) - Containerization
 3. [PostgreSQL Guide](docs/databases/postgresql/postgresql-guide.md) - Database fundamentals
@@ -64,6 +67,7 @@ Then move to more advanced topics based on your interests.
 **Full coverage**: 6-12 months of consistent learning
 
 **Focused paths**:
+
 - Infrastructure Engineer: 3-4 months
 - Data Engineer: 4-5 months  
 - ML Engineer: 3-4 months
@@ -73,6 +77,7 @@ Then move to more advanced topics based on your interests.
 ### Are the examples tested and working?
 
 Yes! All code examples are:
+
 - ✅ Production-ready
 - ✅ Following best practices
 - ✅ Regularly reviewed and updated
@@ -87,29 +92,34 @@ If you find a broken example, please [report it](https://github.com/abedhraiz/ho
 ### How do I find specific topics?
 
 **Method 1**: Use the [Navigation Guide](NAVIGATION.md)
+
 - Technology Index (alphabetical list)
 - Learning Paths (structured courses)
 - Quick Links to popular guides
 
 **Method 2**: Search this repo
+
 ```bash
 grep -r "kubernetes deployment" docs/
 find docs/ -name "*terraform*.md"
 ```
 
 **Method 3**: Use GitHub search
-```
+
+```text
 repo:abedhraiz/how_to kubernetes
 ```
 
 ### Can I use the examples in my company projects?
 
 Yes! The MIT License allows commercial use. You can:
+
 - Use code examples in your projects
 - Adapt patterns to your needs
 - Share internally with your team
 
 **Please**:
+
 - Give attribution where appropriate
 - Don't claim you wrote the original content
 - Consider contributing improvements back
@@ -117,6 +127,7 @@ Yes! The MIT License allows commercial use. You can:
 ### Are there prerequisites for each guide?
 
 Yes! Each guide includes:
+
 - **Prerequisites** section listing required knowledge
 - **Links** to prerequisite guides
 - **Skill level** indicator (Beginner/Intermediate/Advanced)
@@ -139,6 +150,7 @@ If you notice outdated content, please [open an issue](https://github.com/abedhr
 ### How can I contribute?
 
 Many ways to help:
+
 1. **Fix errors** - Grammar, typos, broken links
 2. **Improve guides** - Add examples, clarify sections
 3. **Add new guides** - Share your expertise
@@ -195,11 +207,13 @@ See [NAVIGATION.md](NAVIGATION.md) for complete list.
 ### Will you add guide for [X technology]?
 
 Maybe! Check:
+
 1. [Existing guides](NAVIGATION.md) to see if it's already covered
 2. [Open issues](https://github.com/abedhraiz/how_to/issues) to see if it's planned
 3. [Submit a feature request](https://github.com/abedhraiz/how_to/issues/new?template=feature_request.md) if not
 
 We prioritize:
+
 - Popular technologies
 - Technologies that complement existing guides
 - Community demand
@@ -208,6 +222,7 @@ We prioritize:
 ### Why isn't [specific tool] covered?
 
 We focus on:
+
 - DevOps, Data Engineering, and AI/ML domains
 - Production-grade, widely-adopted tools
 - Technologies with staying power
@@ -218,6 +233,7 @@ Some tools may be too niche, too new, or outside our core focus.
 ### Can I request updates to existing guides?
 
 Yes! [Open a Documentation Issue](https://github.com/abedhraiz/how_to/issues/new?template=documentation.md) with:
+
 - Which guide needs updating
 - What's outdated or missing
 - Specific suggestions for improvement
@@ -229,6 +245,7 @@ Yes! [Open a Documentation Issue](https://github.com/abedhraiz/how_to/issues/new
 ### What are the GitHub Actions workflows?
 
 We have 8 working workflows:
+
 - ✅ Markdown Lint
 - 🔗 Link Checker
 - 📚 Docs Validation
@@ -243,6 +260,7 @@ See [.github/workflows/README.md](.github/workflows/README.md) for details.
 ### Can I run the workflows on my fork?
 
 Yes! The workflows will run automatically on your fork. You can also:
+
 - Trigger manually via Actions tab
 - Adapt them for your own projects
 - Learn from the implementations
@@ -290,6 +308,7 @@ Created and maintained by [Abed Elalim Hraiz](https://www.linkedin.com/in/abed-e
 ### Can I share this with my team?
 
 Absolutely! Please do:
+
 - Share the repository link
 - Fork for your team's internal use
 - Adapt examples to your context
@@ -305,6 +324,7 @@ Absolutely! Please do:
 ### Can I translate content?
 
 Yes! If you want to translate guides:
+
 1. Open an issue to discuss
 2. Coordinate with maintainers
 3. Follow contribution guidelines
@@ -317,6 +337,7 @@ Yes! If you want to translate guides:
 ### I want to learn more about [topic]
 
 Each guide includes:
+
 - 📚 **References** to official documentation
 - 🔗 **Related guides** for deeper learning
 - 💡 **Best practices** and patterns
@@ -325,6 +346,7 @@ Each guide includes:
 ### Are there video tutorials?
 
 Not currently, but:
+
 - Guides include code examples you can run
 - Links to official videos where helpful
 - Community may create video content
@@ -332,6 +354,7 @@ Not currently, but:
 ### Is there a Discord/Slack community?
 
 Not at the moment. We use:
+
 - GitHub Discussions for Q&A
 - GitHub Issues for problems/features
 - LinkedIn for updates
@@ -344,4 +367,6 @@ Not at the moment. We use:
 - 📧 See [SUPPORT.md](SUPPORT.md) for more options
 - 🤝 Check [CONTRIBUTING.md](CONTRIBUTING.md) to help improve this FAQ
 
-*Last updated: February 2026*
+## Last Updated
+
+February 2026

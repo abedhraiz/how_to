@@ -9,6 +9,7 @@ This document outlines the planned improvements and additions to the DevOps & Da
 To be the most comprehensive, practical, and community-driven knowledge base for modern DevOps, Data Engineering, and AI/ML practices.
 
 **Core Principles:**
+
 - Production-ready examples
 - Real-world best practices
 - Clear, actionable guidance
@@ -20,6 +21,7 @@ To be the most comprehensive, practical, and community-driven knowledge base for
 ## 📅 Current Status (February 2026)
 
 ### ✅ Completed
+
 - 70+ comprehensive guides
 - 140+ working examples
 - 8 GitHub Actions workflows
@@ -29,6 +31,7 @@ To be the most comprehensive, practical, and community-driven knowledge base for
 - AI/ML lifecycle documentation (42 guides)
 
 ### 📊 Repository Stats
+
 - 106 markdown files
 - 10,000+ lines of documentation
 - 14 major technology categories
@@ -41,6 +44,7 @@ To be the most comprehensive, practical, and community-driven knowledge base for
 ### Documentation Expansion
 
 #### New Guides
+
 - [ ] **AWS Services Deep Dive**
   - Lambda and serverless architectures
   - ECS/EKS production patterns
@@ -72,6 +76,7 @@ To be the most comprehensive, practical, and community-driven knowledge base for
   - SLO/SLI/SLA frameworks
 
 #### Content Improvements
+
 - [ ] Add more real-world case studies
 - [ ] Include failure scenarios and recovery
 - [ ] Add performance benchmarking examples
@@ -100,29 +105,34 @@ To be the most comprehensive, practical, and community-driven knowledge base for
 ### Advanced Topics
 
 #### Infrastructure as Code
+
 - [ ] **Pulumi guide** - Modern IaC with programming languages
 - [ ] **CDK for Terraform** - Type-safe infrastructure
 - [ ] **Crossplane** - Kubernetes-native infrastructure management
 
 #### Data Engineering
+
 - [ ] **Apache Spark** - Distributed data processing
 - [ ] **dbt (Data Build Tool)** - Data transformation
 - [ ] **Apache Flink** - Real-time stream processing
 - [ ] **Data quality** - Great Expectations, Soda Core
 
 #### AI/ML Operations
+
 - [ ] **MLflow** - End-to-end ML lifecycle
 - [ ] **Kubeflow** - ML on Kubernetes
 - [ ] **Ray** - Distributed computing for ML
 - [ ] **Model monitoring** - Evidently AI, Fiddler
 
 #### Security & Compliance
+
 - [ ] **HashiCorp Vault** - Secrets management
 - [ ] **OPA (Open Policy Agent)** - Policy as code
 - [ ] **Falco** - Runtime security
 - [ ] **Compliance as Code** - InSpec, CloudCustodian
 
 #### GitOps
+
 - [ ] **ArgoCD** - Declarative GitOps
 - [ ] **Flux** - GitOps toolkit
 - [ ] **GitOps workflows** - Complete patterns
@@ -148,18 +158,21 @@ To be the most comprehensive, practical, and community-driven knowledge base for
 ### Content Expansion
 
 #### Emerging Technologies
+
 - [ ] WebAssembly for edge computing
 - [ ] eBPF for observability and security
 - [ ] Quantum computing basics
 - [ ] Edge AI and TinyML
 
 #### Advanced Architectures
+
 - [ ] Event-driven architecture patterns
 - [ ] Domain-driven design (DDD)
 - [ ] Microservices migration strategies
 - [ ] Zero-trust architecture
 
 #### Team & Process
+
 - [ ] SRE practices and playbooks
 - [ ] Incident management
 - [ ] On-call best practices
@@ -188,17 +201,20 @@ To be the most comprehensive, practical, and community-driven knowledge base for
 Your input shapes our priorities!
 
 ### Vote on Features
+
 - 👍 React to issues with 👍 for features you want
 - Comment on roadmap issues with your use case
 - Share what you'd find most valuable
 
 ### Propose New Items
+
 1. Check existing [feature requests](https://github.com/abedhraiz/how_to/labels/enhancement)
 2. [Open a new feature request](https://github.com/abedhraiz/how_to/issues/new?template=feature_request.md)
 3. Explain the value and use case
 4. Offer to contribute if possible
 
 ### Contribute Content
+
 - Write new guides
 - Improve existing documentation
 - Share real-world examples
@@ -213,18 +229,21 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 We track these to measure impact:
 
 ### Engagement
+
 - Stars and forks
 - Issues and discussions
 - Pull requests
 - Community contributions
 
 ### Quality
+
 - Guide completeness
 - Example accuracy
 - Link health
 - Update frequency
 
 ### Reach
+
 - Unique visitors
 - Guide views
 - Example usage
@@ -235,6 +254,7 @@ We track these to measure impact:
 ## 🔄 Review Process
 
 This roadmap is reviewed and updated:
+
 - **Monthly** - Progress check and priority adjustments
 - **Quarterly** - Major milestone reviews
 - **Annually** - Strategic direction and vision
@@ -254,12 +274,14 @@ Have thoughts on the roadmap?
 ## 📅 Recent Updates
 
 ### January 2026
+
 - Reorganized repository into hierarchical structure
 - Added AI/ML lifecycle documentation (42 guides)
 - Enhanced navigation system
 - Created learning paths
 
 ### December 2025
+
 - Added AI/ML frameworks section
 - Expanded LLM operations guide
 - Added security guides
@@ -268,6 +290,6 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed history.
 
 ---
 
-**This roadmap is a living document and will evolve based on community needs and technology trends.**
+## Last Updated
 
-*Last updated: February 2026*
+February 2026

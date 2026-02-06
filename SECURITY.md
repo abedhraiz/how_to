@@ -45,18 +45,21 @@ When reporting a vulnerability, please include:
 This repository follows these security practices:
 
 #### For Documentation
+
 - ✅ No hardcoded credentials in examples
 - ✅ All examples use placeholder values (e.g., `YOUR_API_KEY`)
 - ✅ Security warnings included in sensitive topics
 - ✅ Regular review of code examples for security issues
 
 #### For Repository
+
 - ✅ Branch protection on main branch
 - ✅ Required reviews for pull requests
 - ✅ Automated security scanning via GitHub Actions
 - ✅ Regular dependency updates for workflows
 
 #### For Examples
+
 - ✅ Docker images use specific versions (not `latest`)
 - ✅ Secrets management examples follow best practices
 - ✅ Network configurations show security-first approaches
