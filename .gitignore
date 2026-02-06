@@ -1,0 +1,128 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor/IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary Files
+*.tmp
+*.temp
+*.log
+*.bak
+*.backup
+*.orig
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.npm
+.eslintcache
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Ruby
+*.gem
+.bundle
+vendor/bundle
+
+# Go
+*.exe
+*.test
+*.out
+
+# Java
+*.class
+*.jar
+*.war
+target/
+
+# Build outputs
+dist/
+build/
+out/
+*.min.js
+*.min.css
+
+# Cache directories
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.secret
+secrets.yml
+secrets.yaml
+
+# Documentation build
+_site/
+.jekyll-cache/
+.sass-cache/
+_book/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+
+# Docker
+docker-compose.override.yml
+
+# Kubernetes
+*.kubeconfig
+
+# Cloud credentials
+credentials.json
+service-account.json
+*-credentials.json
+
+# Misc
+.scratch/
+scratch/
+tmp/
+temp/
